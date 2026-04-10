@@ -1,0 +1,18 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#1a1a1a"/>
+  
+  <!-- Head -->
+  <circle cx="200" cy="120" r="50" fill="#333"/>
+  
+  <!-- Shoulders/Torso -->
+  <path d="M 150 170 Q 150 220 170 280 L 230 280 Q 250 220 250 170 Z" fill="#333"/>
+  
+  <!-- Accent line -->
+  <rect x="0" y="390" width="400" height="10" fill="#2563eb" opacity="0.6"/>
+  
+  <!-- Text -->
+  <text x="200" y="350" font-family="system-ui, sans-serif" font-size="16" fill="#888" text-anchor="middle">
+    Add Your Photo Here
+  </text>
+</svg>
