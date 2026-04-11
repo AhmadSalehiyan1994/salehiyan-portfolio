@@ -13,12 +13,46 @@ export function ContactOptions() {
   const [status, setStatus] = useState<string>("");
 
   const contactMethods = [
-    { label: "Email", value: siteContent.person.email, href: `mailto:${siteContent.person.email}` },
-    { label: "Phone", value: siteContent.person.phone, href: `tel:${siteContent.person.phone}` },
-    { label: "LinkedIn", value: "Connect on LinkedIn", href: siteContent.person.linkedin, external: true },
-    { label: "GitHub", value: "GitHub Profile", href: siteContent.person.github, external: true },
-    { label: "Telegram", value: "Message on Telegram", href: siteContent.person.telegram, external: true },
-    { label: "WhatsApp", value: "Chat on WhatsApp", href: siteContent.person.whatsapp, external: true },
+    {
+      label: "Email",
+      value: siteContent.person.email,
+      href: `mailto:${siteContent.person.email}`,
+      hoverClass: "hover:border-[#EA4335]/60 hover:bg-[#EA4335]/10 hover:text-[#EA4335]",
+    },
+    {
+      label: "Phone",
+      value: siteContent.person.phone,
+      href: `tel:${siteContent.person.phone}`,
+      hoverClass: "hover:border-amber-400/60 hover:bg-amber-400/10 hover:text-amber-300",
+    },
+    {
+      label: "LinkedIn",
+      value: "Connect on LinkedIn",
+      href: siteContent.person.linkedin,
+      external: true,
+      hoverClass: "hover:border-[#0A66C2]/60 hover:bg-[#0A66C2]/10 hover:text-[#0A66C2]",
+    },
+    {
+      label: "GitHub",
+      value: "GitHub Profile",
+      href: siteContent.person.github,
+      external: true,
+      hoverClass: "hover:border-[#6e7681]/60 hover:bg-[#6e7681]/10 hover:text-[#6e7681]",
+    },
+    {
+      label: "Telegram",
+      value: "Message on Telegram",
+      href: siteContent.person.telegram,
+      external: true,
+      hoverClass: "hover:border-[#229ED9]/60 hover:bg-[#229ED9]/10 hover:text-[#229ED9]",
+    },
+    {
+      label: "WhatsApp",
+      value: "Chat on WhatsApp",
+      href: siteContent.person.whatsapp,
+      external: true,
+      hoverClass: "hover:border-[#25D366]/60 hover:bg-[#25D366]/10 hover:text-[#25D366]",
+    },
   ];
 
   const quickCopy = useMemo(
@@ -80,7 +114,7 @@ export function ContactOptions() {
             href={method.href}
             target={method.external ? "_blank" : undefined}
             rel={method.external ? "noreferrer" : undefined}
-            className="rounded-lg border border-border bg-card/50 p-4 transition-colors hover:border-primary hover:bg-card"
+            className={`rounded-lg border border-border bg-card/50 p-4 transition-colors ${method.hoverClass}`}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{method.label}</p>
             <p className="mt-2 text-sm text-foreground">{method.value}</p>

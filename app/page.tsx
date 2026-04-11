@@ -309,16 +309,16 @@ export default function HomePage() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="mailto:Ahmad.Salehiyan@okstate.edu" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:bg-card hover:text-primary">
+            <Link href="mailto:ahmad@salehiyan.com" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-[#EA4335]/60 hover:bg-[#EA4335]/10 hover:text-[#EA4335]">
               <Mail className="mr-2 h-4 w-4" /> Email
             </Link>
-            <Link href="https://www.linkedin.com/in/ahmad-salehiyan" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:bg-card hover:text-primary">
+            <Link href="https://www.linkedin.com/in/ahmad-salehiyan" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-[#0A66C2]/60 hover:bg-[#0A66C2]/10 hover:text-[#0A66C2]">
               LinkedIn
             </Link>
-            <Link href="https://t.me/AhmadSalehiyan" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:bg-card hover:text-primary">
+            <Link href="https://t.me/AhmadSalehiyan" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-[#229ED9]/60 hover:bg-[#229ED9]/10 hover:text-[#229ED9]">
               Telegram
             </Link>
-            <Link href="https://wa.me/14052693549" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:bg-card hover:text-primary">
+            <Link href="https://wa.me/14052693549" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-[#25D366]/60 hover:bg-[#25D366]/10 hover:text-[#25D366]">
               WhatsApp
             </Link>
           </div>
@@ -387,8 +387,8 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-3">
               <Button type="submit" size="lg">Send Message</Button>
               <a
-                href="mailto:Ahmad.Salehiyan@okstate.edu?subject=Portfolio%20Inquiry"
-                className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-medium text-foreground transition hover:text-primary"
+                href="mailto:ahmad@salehiyan.com?subject=Portfolio%20Inquiry"
+                className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-medium text-foreground transition hover:border-[#EA4335]/60 hover:bg-[#EA4335]/10 hover:text-[#EA4335]"
               >
                 Mailto Fallback
               </a>

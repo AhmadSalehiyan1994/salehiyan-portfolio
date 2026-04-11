@@ -12,6 +12,6 @@
 - Deploying practical ML workflows for prediction and diagnostics
 
 ## Contact
-- Email: Ahmad.Salehiyan@okstate.edu
+- Email: ahmad@salehiyan.com
 - LinkedIn: https://www.linkedin.com/in/ahmad-salehiyan
 - GitHub: https://github.com/ahmadsalehiyan

@@ -105,14 +105,14 @@ export default function ContactPage() {
           Email is best for project context. LinkedIn, WhatsApp, and GitHub are helpful for quick introductions or context.
         </p>
         <div className="mt-5 flex flex-wrap gap-3 text-sm">
-          <Link href={`mailto:${siteContent.person.email}`} className="rounded-full border border-border px-4 py-2 text-foreground transition-colors duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground">
+          <Link href={`mailto:${siteContent.person.email}`} className="rounded-full border border-border px-4 py-2 text-foreground transition-colors duration-300 ease-in-out hover:border-[#EA4335]/60 hover:bg-[#EA4335]/10 hover:text-[#EA4335]">
             Email
           </Link>
           <a
             href={siteContent.person.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-border px-4 py-2 text-foreground transition-colors duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground"
+            className="rounded-full border border-border px-4 py-2 text-foreground transition-colors duration-300 ease-in-out hover:border-[#0A66C2]/60 hover:bg-[#0A66C2]/10 hover:text-[#0A66C2]"
           >
             LinkedIn
           </a>
@@ -120,7 +120,7 @@ export default function ContactPage() {
             href={siteContent.person.whatsapp}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-border px-4 py-2 text-foreground transition-colors duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground"
+            className="rounded-full border border-border px-4 py-2 text-foreground transition-colors duration-300 ease-in-out hover:border-[#25D366]/60 hover:bg-[#25D366]/10 hover:text-[#25D366]"
           >
             WhatsApp
           </a>
@@ -167,10 +167,10 @@ export default function ContactPage() {
           Prefer async? Send your context and I’ll reply with a practical next-step plan.
         </p>
         <div className="mt-6 flex flex-wrap gap-4 text-sm">
-          <a href={siteContent.person.linkedin} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+          <a href={siteContent.person.linkedin} target="_blank" rel="noreferrer" className="text-primary transition-colors hover:text-[#0A66C2] hover:underline">
             LinkedIn
           </a>
-          <a href={siteContent.person.github} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+          <a href={siteContent.person.github} target="_blank" rel="noreferrer" className="text-primary transition-colors hover:text-[#6e7681] hover:underline">
             GitHub
           </a>
           <a href="/files/Ahmad-Salehiyan-CV.pdf" download className="text-primary hover:underline">

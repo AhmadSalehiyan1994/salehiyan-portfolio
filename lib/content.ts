@@ -60,7 +60,7 @@ export const siteContent = {
     location: "Stillwater, Oklahoma, USA",
     timeZone: "America/Chicago",
     typicalResponseTime: "Usually replies within 24 hours",
-    email: "Ahmad.Salehiyan@okstate.edu",
+    email: "ahmad@salehiyan.com",
     phone: "+1 405 269 3549",
     linkedin: "https://www.linkedin.com/in/ahmad-salehiyan",
     github: "https://github.com/ahmadsalehiyan",
