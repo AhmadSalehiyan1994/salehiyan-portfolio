@@ -22,6 +22,7 @@
     "icons:refresh": "npm run icons:generate && npm run icons:normalize-html"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

@@ -7,6 +7,7 @@ import { siteContent } from "@/lib/content";
 import { AnalyticsScripts } from "@/components/analytics-scripts";
 import { StickyContactCta } from "@/components/sticky-contact-cta";
 import { getCurrentLanguage } from "@/lib/i18n";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <StickyContactCta />
         <AnalyticsScripts />
+        <Analytics />
       </body>
     </html>
   );
