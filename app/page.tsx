@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Award, BriefcaseBusiness, Code2, ExternalLink, GraduationCap, Mail, Wrench } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CvDownloadLink } from "@/components/cv-download-link";
 import { siteContent } from "@/lib/content";
+import { cn } from "@/lib/utils";
 import { publications as publicationContent, type PublicationArticle } from "@/lib/publications";
 
 export const metadata: Metadata = {
@@ -81,7 +83,7 @@ export default function HomePage() {
           <div className="md:col-span-8">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Welcome to my world</p>
             <h1 className="mt-3 max-w-4xl text-balance text-4xl font-semibold tracking-tight text-foreground md:text-6xl">
-              Hi, I&apos;m Ahmad Salehiyan
+              Hi, I&apos;m Brian
             </h1>
             <p className="mt-6 max-w-3xl text-pretty text-base leading-8 text-muted-foreground md:text-lg">
               I am an industrial engineer focused on turning operational uncertainty into measurable decision confidence. My work blends
@@ -95,20 +97,34 @@ export default function HomePage() {
               <Badge variant="outline">Optimization Modeling</Badge>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#about" className="hover-glow-effect hover-elevate inline-flex rounded-md">
-                <Button size="lg">
-                  Explore My Approach <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+              <a
+                href="#about"
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "bg-orange-600 text-white hover:bg-[#FF5A00]"
+                )}
+              >
+                Explore My Approach <ArrowRight className="ml-2 h-4 w-4" />
               </a>
-              <a href="#publications" className="hover-glow-effect hover-elevate inline-flex rounded-md">
-                <Button variant="outline" size="lg">View Publications</Button>
+              <a
+                href="#publications"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "border-zinc-800 bg-transparent text-zinc-200 hover:border-zinc-700 hover:bg-zinc-900 hover:text-white"
+                )}
+              >
+                View Publications
               </a>
-              <a href="#contact" className="hover-glow-effect hover-elevate inline-flex rounded-md">
-                <Button variant="outline" size="lg">Contact Me</Button>
+              <a
+                href="#contact"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "border-zinc-800 bg-transparent text-zinc-200 hover:border-zinc-700 hover:bg-zinc-900 hover:text-white"
+                )}
+              >
+                Contact Me
               </a>
-              <a href="/files/Ahmad-Salehiyan-CV.pdf" download className="hover-glow-effect hover-elevate inline-flex rounded-md">
-                <Button variant="outline" size="lg">Download CV</Button>
-              </a>
+              <CvDownloadLink />
             </div>
             <div className="mt-8 rounded-lg border border-border bg-card/50 p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">Best Skill On</p>
@@ -394,6 +410,42 @@ export default function HomePage() {
               </a>
             </div>
           </form>
+        </div>
+      </section>
+
+      <section id="latest-technical-insights" className="border-t border-zinc-800 px-6 py-16 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-orange-500">Insights Preview</p>
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Latest Technical Insights</h2>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <a
+              href="/insights/integer-programming"
+              className="block rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-orange-600"
+            >
+              <h3 className="text-lg font-semibold text-orange-500">Integer Programming</h3>
+              <p className="mt-3 text-sm leading-7 text-zinc-400">
+                Formulating mixed-integer programs to optimize warehouse order-picking efficiency and reduce routing overhead.
+              </p>
+            </a>
+            <a
+              href="/insights/machine-learning"
+              className="block rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-orange-600"
+            >
+              <h3 className="text-lg font-semibold text-orange-500">Machine Learning</h3>
+              <p className="mt-3 text-sm leading-7 text-zinc-400">
+                Applying Double Deep Q-Networks to solve energy arbitrage problems in battery storage systems.
+              </p>
+            </a>
+            <a
+              href="/insights/maintenance-management"
+              className="block rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-orange-600"
+            >
+              <h3 className="text-lg font-semibold text-orange-500">Maintenance Management</h3>
+              <p className="mt-3 text-sm leading-7 text-zinc-400">
+                Bridging stochastic POMDP models with physical system constraints to optimize real-world maintenance scheduling.
+              </p>
+            </a>
+          </div>
         </div>
       </section>
     </>

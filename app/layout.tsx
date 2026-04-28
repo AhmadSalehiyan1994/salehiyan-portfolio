@@ -7,7 +7,6 @@ import { siteContent } from "@/lib/content";
 import { AnalyticsScripts } from "@/components/analytics-scripts";
 import { StickyContactCta } from "@/components/sticky-contact-cta";
 import { getCurrentLanguage } from "@/lib/i18n";
-import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -66,6 +65,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const lang = getCurrentLanguage();
   return (
     <html lang={lang} dir="ltr" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };",
+          }}
+        />
+        <script defer src="/_vercel/insights/script.js"></script>
+      </head>
       <body className="min-h-screen font-sans">
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <SiteHeader />
@@ -73,7 +80,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <StickyContactCta />
         <AnalyticsScripts />
-        <Analytics />
       </body>
     </html>
   );
