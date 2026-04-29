@@ -83,7 +83,7 @@ export default function HomePage() {
           <div className="md:col-span-8">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Welcome to my world</p>
             <h1 className="mt-3 max-w-4xl text-balance text-4xl font-semibold tracking-tight text-foreground md:text-6xl">
-              Hi, I&apos;m Ahmad Salehiyan
+              Hi, I&apos;m Ahmad
             </h1>
             <p className="mt-6 max-w-3xl text-pretty text-base leading-8 text-muted-foreground md:text-lg">
               I am an industrial engineer focused on turning operational uncertainty into measurable decision confidence. My work blends
