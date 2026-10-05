@@ -155,7 +155,7 @@ export function ProjectList() {
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
-                {project.stack.slice(0, 3).map((item) => (
+                {project.stack.map((item) => (
                   <Badge key={item} variant="outline">{item}</Badge>
                 ))}
               </div>

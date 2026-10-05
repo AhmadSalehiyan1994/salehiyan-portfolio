@@ -23,6 +23,7 @@ export function SiteFooter() {
           <a href={siteContent.person.github} target="_blank" rel="noreferrer" className="hover:text-foreground">
             GitHub
           </a>
+          <a href={siteContent.person.scholar} target="_blank" rel="noreferrer" className="hover:text-foreground">Google Scholar</a>
           <Link href="/cv" className="hover:text-foreground">
             CV
           </Link>

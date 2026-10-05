@@ -10,10 +10,10 @@ export function AboutSection() {
         </div>
         <div className="md:col-span-8">
           <p className="max-w-3xl text-pretty leading-8 text-muted-foreground">
-            {siteContent.person.shortBio} My academic foundation in reliability engineering and stochastic modeling, combined with practical implementation experience, enables me to bridge theory and application.
+            {siteContent.person.shortBio}
           </p>
           <p className="mt-4 max-w-3xl text-pretty leading-8 text-muted-foreground">
-            <strong className="text-foreground">Current research focus:</strong> Reliability engineering, data-driven decision making, and optimization methods for industrial systems.
+            <strong className="text-foreground">Research interests:</strong> {siteContent.person.researchInterests}
           </p>
         </div>
       </div>

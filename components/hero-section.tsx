@@ -9,13 +9,6 @@ import { siteContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics-client";
 
-function firstSentence(text: string) {
-  const normalized = text.replace(/\s+/g, " ").trim();
-  const idx = normalized.indexOf(".");
-  if (idx === -1) return normalized;
-  return normalized.slice(0, idx + 1);
-}
-
 export function HeroSection() {
   const { person, hero } = siteContent;
 
@@ -26,12 +19,12 @@ export function HeroSection() {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1">
             <span className="inline-block h-2 w-2 rounded-full bg-primary"></span>
             <a href="https://ceat.okstate.edu/iem" target="_blank" rel="noreferrer" className="text-xs font-medium text-primary hover:underline">
-              PhD Candidate in Industrial Engineering & Management
+              Ph.D. Researcher in Industrial Engineering and Management
             </a>
           </div>
           
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground md:text-6xl">
-            {person.name}
+            {hero.tagline}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{hero.valueProposition}</p>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{hero.audienceLine}</p>
@@ -43,7 +36,7 @@ export function HeroSection() {
           </div>
           
           <p className="mt-6 max-w-2xl text-pretty text-sm leading-7 text-muted-foreground md:text-base">
-            {firstSentence(siteContent.person.shortBio)} {firstSentence(siteContent.proofSignals[2].detail)}
+            Research interests: {siteContent.person.researchInterests}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

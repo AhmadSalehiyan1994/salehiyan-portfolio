@@ -3,14 +3,14 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { siteContent } from "@/lib/content";
+import { siteContent, siteMetadata } from "@/lib/content";
 import { AnalyticsScripts } from "@/components/analytics-scripts";
 import { StickyContactCta } from "@/components/sticky-contact-cta";
 import { getCurrentLanguage } from "@/lib/i18n";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
-const siteTitle = "Ahmad Salehiyan | Industrial Engineer and Data-Driven Problem Solver";
+const siteTitle = siteMetadata.title;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteContent.person.website),
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     default: siteTitle,
     template: `%s | ${siteContent.person.name}`,
   },
-  description: siteContent.hero.valueProposition,
+  description: siteMetadata.description,
   applicationName: `${siteContent.person.name} Portfolio`,
   openGraph: {
     title: siteTitle,
-    description: siteContent.hero.valueProposition,
+    description: siteMetadata.description,
     url: siteContent.person.website,
     siteName: siteContent.person.name,
     locale: "en_US",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
-    description: siteContent.hero.valueProposition,
+    description: siteMetadata.description,
     images: [siteContent.person.image],
   },
   alternates: {

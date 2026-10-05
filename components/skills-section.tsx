@@ -8,41 +8,14 @@ export function SkillsSection() {
       <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">Technical toolkit and methodologies</h2>
       
       <div className="mt-10 grid gap-8 md:grid-cols-2">
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Programming & Languages</h3>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {siteContent.skills.languages.map((item) => (
-              <Badge key={item} variant="outline">{item}</Badge>
-            ))}
+        {siteContent.skillGroups.map((group) => (
+          <div key={group.title}>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">{group.title}</h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {group.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
+            </div>
           </div>
-        </div>
-        
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Methods & Approaches</h3>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {siteContent.skills.methods.map((item) => (
-              <Badge key={item} variant="outline">{item}</Badge>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Tools & Platforms</h3>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {siteContent.skills.tools.map((item) => (
-              <Badge key={item} variant="outline">{item}</Badge>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Specializations</h3>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {siteContent.skills.specializations.map((item) => (
-              <Badge key={item} variant="outline">{item}</Badge>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

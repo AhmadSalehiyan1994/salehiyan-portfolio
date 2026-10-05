@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Award, BriefcaseBusiness, Code2, ExternalLink, GraduationCap, Mail, Wrench } from "lucide-react";
+import { ArrowRight, Award, BriefcaseBusiness, Code2, ExternalLink, GraduationCap, Mail } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CvDownloadLink } from "@/components/cv-download-link";
-import { siteContent } from "@/lib/content";
+import { siteContent, siteMetadata } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { publications as publicationContent, type PublicationArticle } from "@/lib/publications";
+import { PublicationsSection } from "@/components/publications-section";
 
 export const metadata: Metadata = {
-  title: "Ahmad Salehiyan | Industrial Engineer and Data-Driven Problem Solver",
-  description:
-    "Industrial engineering portfolio focused on reliability engineering, operational analytics, optimization modeling, and data-driven decision systems.",
+  title: { absolute: siteMetadata.title },
+  description: siteMetadata.description,
 };
 
 const certifications = [
@@ -25,41 +25,7 @@ const certifications = [
   "ICDL (98-hour)",
 ];
 
-const professionalTimeline = [
-  {
-    period: "2023 — Present",
-    role: "PhD Candidate in Industrial Engineering",
-    company: "Oklahoma State University",
-    summary:
-      "Advancing research in reliability engineering, stochastic modeling, and data-driven decision systems for maintenance and operations planning.",
-    highlights: [
-      "Built research-grade analytical workflows for predictive maintenance and failure-risk interpretation.",
-      "Developed reproducible model documentation to improve technical communication across mixed audiences.",
-    ],
-  },
-  {
-    period: "2020 — 2023",
-    role: "Maintenance Data & Reliability Practitioner",
-    company: "Farandish Company (Fish Feed Production)",
-    summary:
-      "Supported maintenance analytics and fault-detection work using data mining, benchmarking, and reliability-focused diagnostics.",
-    highlights: [
-      "Contributed to early machine fault-detection initiatives with interdisciplinary research teams.",
-      "Translated unstructured operational signals into actionable maintenance insights.",
-    ],
-  },
-  {
-    period: "2019 — 2020",
-    role: "Industrial Manager",
-    company: "Karin Engineering Company (Crane Design & Manufacturing)",
-    summary:
-      "Led process and quality documentation efforts, including operation process charts and inspection form standardization for project delivery.",
-    highlights: [
-      "Improved process visibility by structuring QC checkpoints across project phases.",
-      "Aligned project tracking artifacts with operational handoff requirements.",
-    ],
-  },
-];
+const professionalTimeline = siteContent.experience;
 
 const isPublication = (item: PublicationArticle | undefined): item is PublicationArticle => Boolean(item);
 
@@ -86,15 +52,13 @@ export default function HomePage() {
               Hi, I&apos;m Ahmad
             </h1>
             <p className="mt-6 max-w-3xl text-pretty text-base leading-8 text-muted-foreground md:text-lg">
-              I am an industrial engineer focused on turning operational uncertainty into measurable decision confidence. My work blends
-              reliability engineering, machine learning, and optimization so operations teams can move from reactive firefighting to
-              evidence-backed planning.
+              {siteContent.hero.valueProposition}
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              <Badge variant="outline">PhD Candidate — Oklahoma State University</Badge>
-              <Badge variant="outline">Reliability Engineering</Badge>
+              <Badge variant="outline">Ph.D. Researcher — Oklahoma State University</Badge>
+              <Badge variant="outline">Deep Reinforcement Learning</Badge>
               <Badge variant="outline">Machine Learning</Badge>
-              <Badge variant="outline">Optimization Modeling</Badge>
+              <Badge variant="outline">Stochastic Optimization</Badge>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -159,20 +123,8 @@ export default function HomePage() {
             <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Data-Driven Engineering Profile</h2>
           </div>
           <div className="md:col-span-8 space-y-4 text-base leading-8 text-muted-foreground">
-            <p>
-              I specialize in converting high-variance operational environments into structured decision systems. Instead of treating data as
-              a reporting artifact, I build analytical workflows that clarify root causes, quantify trade-offs, and support faster
-              reliability actions at the point of decision.
-            </p>
-            <p>
-              My technical focus sits at the intersection of stochastic modeling, maintenance analytics, and optimization. I routinely map
-              messy maintenance histories, sensor streams, and production context into models that remain interpretable for engineers,
-              supervisors, and leadership.
-            </p>
-            <p>
-              Current priorities include predictive maintenance governance, robust KPI architecture, and optimization-backed planning methods
-              for complex industrial systems where uptime, quality, and labor constraints must be balanced simultaneously.
-            </p>
+            <p>{siteContent.person.shortBio}</p>
+            <p><strong className="text-foreground">Research interests:</strong> {siteContent.person.researchInterests}</p>
           </div>
         </div>
       </section>
@@ -184,12 +136,12 @@ export default function HomePage() {
 
           <div className="mt-8 space-y-6">
             {professionalTimeline.map((item) => (
-              <article key={`${item.company}-${item.period}`} className="relative rounded-xl border border-border bg-card/50 p-5 md:p-6">
+              <article key={`${item.organization}-${item.period}`} className="relative rounded-xl border border-border bg-card/50 p-5 md:p-6">
                 <div className="md:flex md:items-start md:justify-between md:gap-6">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">{item.period}</p>
                     <h3 className="mt-1 text-xl font-semibold text-foreground">{item.role}</h3>
-                    <p className="mt-1 text-sm font-medium text-foreground/90">{item.company}</p>
+                    <p className="mt-1 text-sm font-medium text-foreground/90">{item.organization}</p>
                   </div>
                   <BriefcaseBusiness className="mt-4 h-5 w-5 text-primary md:mt-0" />
                 </div>
@@ -234,36 +186,16 @@ export default function HomePage() {
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Professional Skills</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Software, Programming, and Methods</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <Card className="bg-card/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg"><Wrench className="h-5 w-5 text-primary" /> Software & Tools</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {["Power BI", "GAMS", "PostgreSQL", "Tableau", "Primavera P6", "Excel"].map((item) => (
-                  <Badge key={item} variant="outline">{item}</Badge>
-                ))}
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg"><Code2 className="h-5 w-5 text-primary" /> Programming Languages</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {siteContent.skills.languages.map((language) => (
-                  <Badge key={language} variant="outline">{language}</Badge>
-                ))}
-              </CardContent>
-            </Card>
-            <Card className="bg-card/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg"><ArrowRight className="h-5 w-5 text-primary" /> Platforms & Methods</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
-                {["Anaconda", ...siteContent.skills.methods].map((item) => (
-                  <Badge key={item} variant="outline">{item}</Badge>
-                ))}
-              </CardContent>
-            </Card>
+            {siteContent.skillGroups.map((group) => (
+              <Card key={group.title} className="bg-card/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg"><Code2 className="h-5 w-5 text-primary" /> {group.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-2">
+                  {group.items.map((item) => <Badge key={item} variant="outline">{item}</Badge>)}
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -284,10 +216,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="publications" className="border-b border-border/40 px-6 py-16 md:py-20">
+      <PublicationsSection />
+
+      <section id="insights" className="border-b border-border/40 px-6 py-16 md:py-20">
         <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Blog / Publications</p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Research & Technical Writing Hub</h2>
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Insights</p>
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Technical Articles</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {publications.map((paper) => (
               <Card key={paper.slug} className="h-full bg-card/50 transition-all hover:border-primary/40 hover:shadow-md">
@@ -300,7 +234,7 @@ export default function HomePage() {
                     href={publicationHrefBySlug[paper.slug]}
                     className="hover-glow-effect hover-elevate mt-5 inline-flex min-h-11 items-center rounded-md border border-border px-4 text-sm font-medium text-foreground transition hover:text-primary focus-visible:outline-none"
                   >
-                    Read Full Paper <ExternalLink className="ml-2 h-4 w-4" />
+                    Read Article <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </CardContent>
               </Card>
@@ -331,6 +265,8 @@ export default function HomePage() {
             <Link href="https://www.linkedin.com/in/ahmad-salehiyan" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-[#0A66C2]/60 hover:bg-[#0A66C2]/10 hover:text-[#0A66C2]">
               LinkedIn
             </Link>
+            <a href={siteContent.person.github} target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-primary/60 hover:text-primary">GitHub</a>
+            <a href={siteContent.person.scholar} target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-primary/60 hover:text-primary">Google Scholar</a>
             <Link href="https://t.me/AhmadSalehiyan" target="_blank" rel="noreferrer" className="hover-glow-effect hover-elevate inline-flex min-h-11 items-center rounded-md border border-border px-4 py-2 text-sm text-foreground transition hover:border-[#229ED9]/60 hover:bg-[#229ED9]/10 hover:text-[#229ED9]">
               Telegram
             </Link>
@@ -433,7 +369,7 @@ export default function HomePage() {
             >
               <h3 className="text-lg font-semibold text-orange-500">Machine Learning</h3>
               <p className="mt-3 text-sm leading-7 text-zinc-400">
-                Applying Double Deep Q-Networks to solve energy arbitrage problems in battery storage systems.
+                Applying machine learning and deep reinforcement learning to decision-making under uncertainty in engineering systems.
               </p>
             </a>
             <a

@@ -40,6 +40,13 @@ export function ContactOptions() {
       hoverClass: "hover:border-[#6e7681]/60 hover:bg-[#6e7681]/10 hover:text-[#6e7681]",
     },
     {
+      label: "Google Scholar",
+      value: "Research publications and citations",
+      href: siteContent.person.scholar,
+      external: true,
+      hoverClass: "hover:border-primary/60 hover:text-primary",
+    },
+    {
       label: "Telegram",
       value: "Message on Telegram",
       href: siteContent.person.telegram,

@@ -24,6 +24,7 @@ export function SiteHeader() {
     { label: "Skills", href: "/#skills" },
     { label: "Certifications", href: "/#certifications" },
     { label: "Publications", href: "/#publications" },
+    { label: "Insights", href: "/#insights" },
     { label: "Contact", href: "/#contact" },
     { label: "CV", href: "/files/Ahmad-Salehiyan-CV.pdf" },
   ] as const;
