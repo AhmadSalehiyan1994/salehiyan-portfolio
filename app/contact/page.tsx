@@ -116,6 +116,8 @@ export default function ContactPage() {
           >
             LinkedIn
           </a>
+          <a href={siteContent.person.github} target="_blank" rel="noreferrer" className="rounded-full border border-border px-4 py-2 text-foreground transition-colors hover:border-primary/60 hover:text-primary">GitHub</a>
+          <a href={siteContent.person.scholar} target="_blank" rel="noreferrer" className="rounded-full border border-border px-4 py-2 text-foreground transition-colors hover:border-primary/60 hover:text-primary">Google Scholar</a>
           <a
             href={siteContent.person.whatsapp}
             target="_blank"
@@ -173,6 +175,7 @@ export default function ContactPage() {
           <a href={siteContent.person.github} target="_blank" rel="noreferrer" className="text-primary transition-colors hover:text-[#6e7681] hover:underline">
             GitHub
           </a>
+          <a href={siteContent.person.scholar} target="_blank" rel="noreferrer" className="text-primary transition-colors hover:underline">Google Scholar</a>
           <a href="/files/Ahmad-Salehiyan-CV.pdf" download className="text-primary hover:underline">
             Download CV PDF
           </a>
