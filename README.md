@@ -1,4 +1,11 @@
- # Ahmad Salehiyan — Personal Website
+# Ahmad Salehiyan: Personal Website
+
+> **Current state (November 2026).** The site is a job-market website for academic and industry roles.
+> Content lives in `lib/content.ts`, `lib/research.ts`, `lib/projects.ts`, and `lib/articles.ts`.
+> See `docs/CONTENT_GUIDE.md` for how to add talk photos, news, the ORCID link, and the industry resume.
+> Analytics: Vercel Web Analytics. Contact form: Formspree. The upgrade brief is in `docs/WEBSITE_UPGRADE.md`.
+> The sections below describe earlier hosting choices and the optional backend. Parts of them are out of date.
+
 
  This repository contains the production code for `salehiyan.com` (portfolio + technical insights).
 
