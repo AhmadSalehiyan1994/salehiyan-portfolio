@@ -39,8 +39,8 @@ export const articles: Article[] = [
     domain: "Machine Learning",
     summary:
       "A practical guide to supervised, unsupervised, and reinforcement learning in reliability work, with attention to what the models can and cannot do.",
-    heroImage: "/images/AI.jpg",
-    heroImageAlt: "Machine learning in industrial systems",
+    heroImage: "/images/industrial-reliability-engineer.jpg",
+    heroImageAlt: "Engineer in safety gear using a tablet on a factory floor",
     publishedAt: "2024-03-15",
     updatedAt: "2026-11-10",
     takeaways: [
