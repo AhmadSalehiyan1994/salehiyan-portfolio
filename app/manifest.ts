@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Ahmad Salehiyan Portfolio",
+    name: "Ahmad Salehiyan",
     short_name: "Salehiyan",
-    description: "Industrial Engineering, optimization, maintenance, and machine learning portfolio.",
+    description: "Ph.D. Candidate at Oklahoma State University. Reinforcement learning and optimization for decision-making under uncertainty.",
     start_url: "/",
     display: "standalone",
-    background_color: "#030712",
-    theme_color: "#0f172a",
+    background_color: "#101012",
+    theme_color: "#101012",
     lang: "en",
     icons: [
       {
