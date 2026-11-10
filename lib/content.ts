@@ -270,7 +270,6 @@ export const siteContent = {
         role: "Graduate Teaching Assistant",
         details:
           "I led course help sessions, explained engineering economics concepts, and guided students through problem-solving.",
-        students: "50 students",
       },
     ] as TeachingItem[],
     // Two to four short points about teaching approach. Empty until the owner provides them.
