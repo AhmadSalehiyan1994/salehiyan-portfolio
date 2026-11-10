@@ -264,6 +264,149 @@ export const articles: Article[] = [
       },
     ],
   },
+
+  // Draft posts (W3). They are built from my own open-access papers and stay hidden until approved:
+  // not listed on /insights, not in the sitemap, and served with a noindex tag.
+  // To publish one, delete its "draft: true" line.
+  {
+    slug: "transformer-gan-autoencoder-intrusion-detection",
+    title: "Three Models in One Detector: A Transformer, a GAN, and an Autoencoder for IIoT Intrusion Detection",
+    domain: "Deep Learning",
+    summary:
+      "Notes from our Future Internet paper on what each part of a hybrid intrusion detection model does, and why the data preparation matters as much as the model.",
+    heroImage: "/images/AI.jpg",
+    heroImageAlt: "Abstract illustration of machine learning",
+    publishedAt: "2026-11-10",
+    updatedAt: "2026-11-10",
+    draft: true,
+    takeaways: [
+      "Each part has one job: the Transformer reads sequences, the GAN adds rare attack samples, and the autoencoder reduces noise.",
+      "Class imbalance is handled before training, with undersampling, SMOTE oversampling, and stratified splits.",
+      "A metaheuristic, an improved chimp optimization algorithm, tunes the hyperparameters instead of manual search.",
+    ],
+    references: [
+      {
+        text: "A. Salehiyan, P. S. Moghaddam, M. Kaveh. An Optimized Transformer-GAN-AE for Intrusion Detection in Edge and IIoT Systems: Experimental Insights from WUSTL-IIoT-2021, EdgeIIoTset, and TON_IoT Datasets. Future Internet, 17(7), 279, 2025.",
+        href: "https://doi.org/10.3390/fi17070279",
+      },
+    ],
+    related: {
+      text: "This post summarizes one of my journal articles. The companion project page covers both of my intrusion detection papers.",
+      publicationIds: ["future-internet-2025", "cmc-2026"],
+      projectSlugs: ["transformer-anomaly-intrusion-detection"],
+    },
+    sections: [
+      {
+        id: "problem",
+        title: "The problem",
+        paragraphs: [
+          "Edge and industrial IoT (IIoT) networks connect many different devices, and the traffic they produce is high-dimensional and uneven. Attacks are rare compared with normal traffic, and the records are noisy. A single deep learning model usually handles one of these difficulties well and the others poorly.",
+          "In this paper we built a hybrid model, which we call Transformer-GAN-AE, and gave each difficulty to the part best suited to it.",
+        ],
+      },
+      {
+        id: "three-parts",
+        title: "What each part does",
+        paragraphs: [
+          "The Transformer extracts temporal features. Its multi-head self-attention captures long-range dependencies in sequential traffic data.",
+          "The generative adversarial network (GAN) learns the data distribution. We use it to add samples for minority classes, which are the rare attack types.",
+          "The autoencoder (AE) denoises and regularizes. It reduces the effect of noise, and a high reconstruction error can itself point to an anomaly.",
+        ],
+      },
+      {
+        id: "tuning",
+        title: "Tuning with an improved chimp optimization algorithm",
+        paragraphs: [
+          "Hybrid models have many hyperparameters, and GAN training is sensitive to them. We tuned the hyperparameters with an improved chimp optimization algorithm (IChOA). Our change to the standard algorithm is a fifth elite agent, which we call the Balancer.",
+          "In our experiments, IChOA made GAN training more stable and faster to converge.",
+        ],
+      },
+      {
+        id: "data",
+        title: "Data preparation",
+        paragraphs: [
+          "Before training, we remove redundant, incomplete, and corrupted records, encode categorical attributes, and scale numerical features to the range 0 to 1. We reduce class imbalance by undersampling the dominant classes and oversampling the minority classes with SMOTE. For the sequence modules, we cut the data into fixed-length time windows. Train, validation, and test sets come from stratified sampling.",
+          "We evaluated the model on three public benchmark data sets: WUSTL-IIoT-2021, EdgeIIoTset, and TON_IoT.",
+        ],
+      },
+      {
+        id: "results",
+        title: "Results",
+        paragraphs: [
+          "We compared the model with six baselines: a standard GAN, a convolutional neural network, a deep belief network, a time-series transformer, BERT, and XGBoost. The Transformer-GAN-AE model gave the best results among them, with a best accuracy of 98.92%. The paper reports the full tables, including recall, AUC, and run time for each data set.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "attack-detection-as-a-decision-problem",
+    title: "Attack Detection as a Decision Problem: A Transformer Encoder with a Reinforcement Learning Agent",
+    domain: "Deep Learning",
+    summary:
+      "Notes from our Computers, Materials & Continua paper on detecting false data injection in smart water systems with a Transformer encoder, a deep reinforcement learning agent, and an evolutionary tuner.",
+    heroImage: "/images/AI.jpg",
+    heroImageAlt: "Abstract illustration of machine learning",
+    publishedAt: "2026-11-10",
+    updatedAt: "2026-11-10",
+    draft: true,
+    takeaways: [
+      "The detector is a reinforcement learning agent: the state is a window of sensor readings, the action is normal or attack, and the reward is plus one or minus one.",
+      "The data sets are recorded histories, so the agent's actions change what it learns but not the physical process.",
+      "An improved grey wolf optimizer selects the hyperparameters of both the Transformer and the agent.",
+    ],
+    references: [
+      {
+        text: "A. Salehiyan, N. Serrano, F. Hernando-Gallego, D. Martín, J. V. Álvarez-Bravo. A Novel Evolutionary Optimized Transformer-Deep Reinforcement Learning Framework for False Data Injection Detection in Industry 4.0 Smart Water Infrastructures. Computers, Materials & Continua, 87(2), 68, 2026.",
+        href: "https://doi.org/10.32604/cmc.2026.075336",
+      },
+    ],
+    related: {
+      text: "This post summarizes one of my journal articles. The companion project page covers both of my intrusion detection papers.",
+      publicationIds: ["cmc-2026", "future-internet-2025"],
+      projectSlugs: ["transformer-anomaly-intrusion-detection"],
+    },
+    sections: [
+      {
+        id: "problem",
+        title: "The problem",
+        paragraphs: [
+          "In a false data injection (FDI) attack, an attacker changes sensor measurements or control signals so that the monitoring system sees a wrong picture of the plant. Smart water infrastructure is exposed to this kind of attack because treatment and distribution depend on networked sensors and controllers.",
+        ],
+      },
+      {
+        id: "formulation",
+        title: "Detection as a sequential decision",
+        paragraphs: [
+          "A Transformer encoder reads a window of multivariate sensor readings and produces an embedding. Multi-head self-attention models the temporal dependencies in the window.",
+          "A deep reinforcement learning (DRL) agent takes that embedding as its state. The action is binary: 0 for normal operation and 1 for an FDI attack. The reward is +1 when the action matches the label and -1 otherwise. Training uses an epsilon-greedy schedule, a replay buffer, and a target network with soft updates.",
+          "One point should be stated plainly. The data sets are fixed historical trajectories, so the agent's actions affect only the reward stream and the later policy updates. They do not change the physical process.",
+        ],
+      },
+      {
+        id: "tuning",
+        title: "Tuning with an improved grey wolf optimizer",
+        paragraphs: [
+          "We selected the hyperparameters of the Transformer and the DRL module with an improved grey wolf optimizer (IGWO). The classical optimizer updates positions from three leaders. Our version adds a fourth leader that balances exploration and exploitation.",
+          "The selected values were a learning rate of 0.004, a batch size of 64, a dropout of 0.2, 6 attention heads, 4 encoder layers, and a discount factor of 0.91. Baseline models were tuned by grid search.",
+        ],
+      },
+      {
+        id: "data",
+        title: "Data and protocol",
+        paragraphs: [
+          "We used three water data sets. SWaT comes from a scaled-down water treatment testbed, with 51 features sampled every second. WADI covers a water distribution system that combines real equipment and simulation, with 123 features sampled every second. BATADAL is simulation-based, with 43 features sampled every minute.",
+          "Missing values are imputed, features are scaled to the range 0 to 1, and labels are binary. The split is 70% training, 10% validation, and 20% testing. Each experiment was repeated five times with different random seeds.",
+        ],
+      },
+      {
+        id: "results",
+        title: "Results",
+        paragraphs: [
+          "We compared the framework with BERT, a plain Transformer, DRL alone, LSTM, CNN, and SVM baselines. It reached a maximum detection accuracy of 99.19%. The paper reports accuracy, recall, AUC, and execution time for each data set.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function wordCount(article: Article) {

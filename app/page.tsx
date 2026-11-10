@@ -179,7 +179,7 @@ export default function HomePage() {
           <div>
             <h3 className="text-lg font-semibold text-foreground">Recent talks</h3>
             <div className="mt-4">
-              <TalkList items={sortedTalks(3)} headingLevel="h4" />
+              <TalkList items={sortedTalks(3)} headingLevel="h4" showImages={false} />
             </div>
             <ArrowLink href="/publications#talks" className="mt-3">
               All talks

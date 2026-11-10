@@ -21,12 +21,16 @@ const shortTitles: Record<string, string> = {
   "machine-learning": "Machine Learning for Reliability",
   "integer-programming": "Integer Programming for Planning",
   "maintenance-management": "Maintenance Management Systems",
+  "transformer-gan-autoencoder-intrusion-detection": "Transformer, GAN, and Autoencoder IDS",
+  "attack-detection-as-a-decision-problem": "Attack Detection as a Decision Problem",
 };
 
 const descriptions: Record<string, string> = {
   "machine-learning": "A practical guide to supervised, unsupervised, and reinforcement learning in reliability work, with references.",
   "integer-programming": "Integer programming formulations and classical methods for planning, allocation, and scheduling, with references.",
   "maintenance-management": "How to build maintenance systems around service level, work-order quality, and CMMS use, with references.",
+  "transformer-gan-autoencoder-intrusion-detection": "Draft. What a Transformer, a GAN, and an autoencoder each do in a hybrid intrusion detection model for IIoT systems.",
+  "attack-detection-as-a-decision-problem": "Draft. False data injection detection in smart water systems with a Transformer encoder and a reinforcement learning agent.",
 };
 
 export function generateMetadata({ params }: ArticlePageProps): Metadata {

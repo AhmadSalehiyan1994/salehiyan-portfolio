@@ -15,7 +15,7 @@ const footerNav = [
 
 export function SiteFooter() {
   const { person } = siteContent;
-  const linkClass = "inline-flex min-h-11 items-center text-muted-foreground underline-offset-4 hover:text-foreground hover:underline";
+  const linkClass = "inline-flex min-h-11 min-w-11 items-center text-muted-foreground underline-offset-4 hover:text-foreground hover:underline";
 
   return (
     <footer className="border-t border-border">
