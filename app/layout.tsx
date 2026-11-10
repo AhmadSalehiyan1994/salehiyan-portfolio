@@ -5,6 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { siteContent, siteMetadata } from "@/lib/content";
+import { indexableRobots } from "@/lib/seo";
 
 // Fonts are self-hosted (SIL Open Font License). Only the body font is preloaded.
 const inter = localFont({
@@ -28,6 +29,11 @@ export const metadata: Metadata = {
   description: siteMetadata.description,
   applicationName: siteContent.person.name,
   authors: [{ name: siteContent.person.name, url: siteContent.person.website }],
+  robots: indexableRobots,
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION?.trim() || undefined,
+    other: process.env.BING_SITE_VERIFICATION?.trim() ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION.trim() } : undefined,
+  },
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatDate, readTimeMinutes, type Article } from "@/lib/articles";
 import { getProjectBySlug } from "@/lib/projects";
 import { getPublication } from "@/lib/research";
+import { siteContent } from "@/lib/content";
 
 export function ArticleLayout({ article }: { article: Article }) {
   return (
@@ -21,6 +22,7 @@ export function ArticleLayout({ article }: { article: Article }) {
           <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-foreground md:text-5xl">{article.title}</h1>
           <p className="mt-4 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{article.summary}</p>
           <p className="mt-5 text-sm text-muted-foreground">
+            By <Link href="/#about" rel="author" className="prose-link">{siteContent.person.name}</Link>.{" "}
             Published <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>. Updated{" "}
             <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>. {readTimeMinutes(article)} min read.
           </p>

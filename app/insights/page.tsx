@@ -8,7 +8,7 @@ import { formatDate, publishedArticles, readTimeMinutes } from "@/lib/articles";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Writing | Ahmad Salehiyan",
+  title: "ML, Optimization and Reliability Writing | Ahmad Salehiyan",
   description: "Articles by Ahmad Salehiyan on machine learning for reliability, integer programming, and maintenance management.",
   path: "/insights",
 });

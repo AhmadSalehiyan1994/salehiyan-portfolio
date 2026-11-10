@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return routes.map((route) => ({
     url: route === "/" ? `${baseUrl}/` : `${baseUrl}${route}`,
-    lastModified: new Date(`${lastUpdated}T00:00:00Z`),
+    lastModified: new Date(`${publishedArticles().find((article) => route === `/insights/${article.slug}`)?.updatedAt || lastUpdated}T00:00:00Z`),
     changeFrequency: route.startsWith("/insights/") || route === "/legal/privacy" ? "yearly" : "monthly",
     priority: route === "/" ? 1 : route.split("/").length > 2 ? 0.6 : 0.8,
   }));

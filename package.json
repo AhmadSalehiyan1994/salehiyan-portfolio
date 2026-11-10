@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "check": "npm run lint && npm run typecheck && npm run test",
     "lighthouse:ci": "lhci autorun",
+    "seo:submit": "node scripts/submit-indexnow.mjs",
     "admin:bootstrap": "node scripts/bootstrap-admin.mjs",
     "jobs:run": "node scripts/run-backend-jobs.mjs",
     "jobs:daemon": "node scripts/run-backend-scheduler.mjs",

@@ -7,7 +7,7 @@ import { earlierWork, projects } from "@/lib/projects";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Projects | Ahmad Salehiyan",
+  title: "ML and Optimization Projects | Ahmad Salehiyan",
   description:
     "Research projects by Ahmad Salehiyan: fleet maintenance with safe MARL, warehouse picker routing, POMDP maintenance, MIMIC-IV, intrusion detection.",
   path: "/projects",

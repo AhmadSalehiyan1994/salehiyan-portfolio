@@ -46,6 +46,16 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Preserve entry points that still appear in search results for the original site.
+      redirect301("/index.html", "/"),
+      redirect301("/cv_file/:path*", "/cv"),
+      // Use the custom domain for the public production alias; branch previews keep working.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "salehiyan-portfolio.vercel.app" }],
+        destination: "https://www.salehiyan.com/:path*",
+        permanent: true,
+      },
       // Old blog URLs. The articles live under /insights.
       redirect301("/blog", "/insights"),
       redirect301("/blog/:slug", "/insights/:slug"),
@@ -84,6 +94,11 @@ const nextConfig = {
       {
         source: "/images/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=2592000" }],
+      },
+      {
+        // Keep the download available while search results favor the maintained CV page.
+        source: "/files/Ahmad-Salehiyan-CV.pdf",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },
     ];
   },

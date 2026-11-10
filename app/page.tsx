@@ -17,7 +17,7 @@ import { TalkList } from "@/components/talk-list";
 import { profileLinks, siteContent, siteMetadata, sortedNews } from "@/lib/content";
 import { featuredProjects } from "@/lib/projects";
 import { jobMarketPaper, researchThemes, selectedPublications, sortedTalks } from "@/lib/research";
-import { personJsonLd, websiteJsonLd } from "@/lib/seo";
+import { profilePageJsonLd, websiteJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function HomePage() {
 
   return (
     <>
-      <SeoJsonLd data={[personJsonLd(), websiteJsonLd()]} />
+      <SeoJsonLd data={[profilePageJsonLd(), websiteJsonLd()]} />
 
       {/* 1. Hero */}
       <section id="welcome" aria-labelledby="hero-heading" className="border-b border-border/40 px-4 py-12 sm:px-6 md:py-20">

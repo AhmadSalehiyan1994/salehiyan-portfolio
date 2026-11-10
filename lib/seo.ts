@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { siteContent, siteMetadata } from "@/lib/content";
+import { lastUpdated, siteContent, siteMetadata } from "@/lib/content";
 import { publications, isPublished, type Publication } from "@/lib/research";
+import type { Article } from "@/lib/articles";
+import type { Project } from "@/lib/projects";
 
 const baseUrl = siteContent.person.website.replace(/\/$/, "");
+
+export const indexableRobots: Metadata["robots"] = {
+  index: true,
+  follow: true,
+  googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+};
 
 export function absoluteUrl(path: string) {
   if (path.startsWith("http")) return path;
@@ -17,15 +25,19 @@ type PageMetadataInput = {
   path: string;
   type?: "website" | "article" | "profile";
   noindex?: boolean;
+  image?: { url: string; alt: string; width?: number; height?: number };
+  publishedTime?: string;
+  modifiedTime?: string;
 };
 
 /** One helper for every page: unique title and description, self-referencing canonical, default OG card. */
-export function pageMetadata({ title, description, path, type = "website", noindex = false }: PageMetadataInput): Metadata {
+export function pageMetadata({ title, description, path, type = "website", noindex = false, image, publishedTime, modifiedTime }: PageMetadataInput): Metadata {
+  const preview = image || { url: siteMetadata.ogImage, width: 1200, height: 630, alt: siteMetadata.ogImageAlt };
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: path },
-    robots: noindex ? { index: false, follow: false } : undefined,
+    robots: noindex ? { index: false, follow: false, googleBot: { index: false, follow: false } } : indexableRobots,
     openGraph: {
       title,
       description,
@@ -33,13 +45,14 @@ export function pageMetadata({ title, description, path, type = "website", noind
       siteName: siteContent.person.name,
       locale: "en_US",
       type,
-      images: [{ url: siteMetadata.ogImage, width: 1200, height: 630, alt: siteMetadata.ogImageAlt }],
+      images: [preview],
+      ...(type === "article" ? { publishedTime, modifiedTime, authors: [siteContent.person.website] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [siteMetadata.ogImage],
+      images: [preview.url],
     },
   };
 }
@@ -56,6 +69,9 @@ export function personJsonLd() {
     "@type": "Person",
     "@id": `${baseUrl}/#person`,
     name: person.name,
+    givenName: "Ahmad",
+    familyName: "Salehiyan",
+    description: siteMetadata.description,
     jobTitle: person.headline,
     email: `mailto:${person.email}`,
     url: baseUrl,
@@ -96,6 +112,65 @@ export function websiteJsonLd() {
   };
 }
 
+/** The homepage is the author's profile, with one stable identity shared by his work. */
+export function profilePageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${baseUrl}/#profile`,
+    url: `${baseUrl}/`,
+    name: siteMetadata.title,
+    description: siteMetadata.description,
+    dateModified: lastUpdated,
+    inLanguage: "en-US",
+    isPartOf: { "@id": `${baseUrl}/#website` },
+    mainEntity: personJsonLd(),
+  };
+}
+
+export function articleJsonLd(article: Article) {
+  const url = absoluteUrl(`/insights/${article.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    url,
+    headline: article.title,
+    description: article.summary,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    inLanguage: "en-US",
+    articleSection: article.domain,
+    author: { "@type": "Person", "@id": `${baseUrl}/#person`, name: siteContent.person.name, url: `${baseUrl}/` },
+    publisher: { "@type": "Person", "@id": `${baseUrl}/#person`, name: siteContent.person.name, url: `${baseUrl}/` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: absoluteUrl(article.heroImage),
+    citation: article.references.map((reference) => reference.href),
+  };
+}
+
+export function projectJsonLd(project: Project) {
+  const url = absoluteUrl(`/projects/${project.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${url}#project`,
+    url,
+    name: project.title,
+    description: project.description,
+    abstract: project.problem,
+    inLanguage: "en-US",
+    about: project.domain,
+    keywords: project.stack,
+    creativeWorkStatus: project.status,
+    author: { "@type": "Person", "@id": `${baseUrl}/#person`, name: siteContent.person.name, url: `${baseUrl}/` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    citation: publications.filter((publication) => publication.project === project.slug).map((publication) => ({
+      "@id": `${baseUrl}/publications#${publication.id}`,
+    })),
+  };
+}
+
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -112,7 +187,7 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
 function authorJsonLd(publication: Publication) {
   return publication.authors.map((author) => {
     const name = author.given && author.family ? `${author.given} ${author.family}` : author.short;
-    return author.me ? { "@type": "Person", name, "@id": `${baseUrl}/#person` } : { "@type": "Person", name };
+    return author.me ? { "@type": "Person", name, "@id": `${baseUrl}/#person`, url: `${baseUrl}/` } : { "@type": "Person", name };
   });
 }
 
@@ -127,6 +202,7 @@ export function scholarlyArticlesJsonLd() {
       name: publication.title,
       author: authorJsonLd(publication),
       datePublished: publication.datePublished || publication.year,
+      inLanguage: "en-US",
       isPartOf: {
         "@type": publication.group === "journal" ? "Periodical" : "PublicationIssue",
         name: publication.venue,
@@ -134,6 +210,16 @@ export function scholarlyArticlesJsonLd() {
       url: doiUrl || publication.url || `${baseUrl}/publications#${publication.id}`,
     };
     if (publication.pages) data.pagination = publication.pages;
+    if (publication.volume) data.isPartOf = {
+      "@type": "PublicationIssue",
+      ...(publication.issue ? { issueNumber: publication.issue } : {}),
+      isPartOf: {
+        "@type": "PublicationVolume",
+        volumeNumber: publication.volume,
+        isPartOf: { "@type": "Periodical", name: publication.venue },
+      },
+    };
+    if (publication.pdf) data.encoding = { "@type": "MediaObject", contentUrl: publication.pdf, encodingFormat: "application/pdf" };
     if (publication.doi) {
       data.identifier = {
         "@type": "PropertyValue",

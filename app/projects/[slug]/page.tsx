@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ProjectFigure } from "@/components/project-figure";
 import { SeoJsonLd } from "@/components/seo-json-ld";
 import { getProjectBySlug, projects } from "@/lib/projects";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata, projectJsonLd } from "@/lib/seo";
 
 type ProjectDetailPageProps = {
   params: { slug: string };
@@ -43,10 +43,10 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 md:py-16">
       <SeoJsonLd
-        data={breadcrumbJsonLd([
+        data={[breadcrumbJsonLd([
           { name: "Projects", path: "/projects" },
           { name: project.shortTitle, path: `/projects/${project.slug}` },
-        ])}
+        ]), projectJsonLd(project)]}
       />
       <Link href="/projects" className="inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All projects

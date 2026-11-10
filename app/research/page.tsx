@@ -8,9 +8,9 @@ import { dissertation, futureAgenda, getPublication, jobMarketPaper, researchSta
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Research | Ahmad Salehiyan",
+  title: "Reinforcement Learning Research | Ahmad Salehiyan",
   description:
-    "Research statement, themes, dissertation, and job market paper of Ahmad Salehiyan: sequential decision-making under uncertainty.",
+    "Ahmad Salehiyan's research at Oklahoma State University: reinforcement learning, POMDP maintenance planning, warehouse routing, and optimization.",
   path: "/research",
 });
 
@@ -18,7 +18,7 @@ export default function ResearchPage() {
   return (
     <>
       <SeoJsonLd data={breadcrumbJsonLd([{ name: "Research", path: "/research" }])} />
-      <PageHeader title="Research" lead="Sequential decision-making under uncertainty in engineering systems." />
+      <PageHeader title="Research" lead="I am Ahmad Salehiyan, a Ph.D. Candidate at Oklahoma State University. I study reinforcement learning and optimization for maintenance planning, warehouse logistics, and decisions under uncertainty." />
 
       <Section id="statement" title="Research statement">
         <div className="max-w-3xl space-y-4 text-base leading-8 text-muted-foreground">

@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/article-layout";
 import { SeoJsonLd } from "@/components/seo-json-ld";
 import { articles, getArticle } from "@/lib/articles";
-import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
-import { siteContent } from "@/lib/content";
+import { articleJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 type ArticlePageProps = {
   params: { slug: string };
@@ -42,24 +41,15 @@ export function generateMetadata({ params }: ArticlePageProps): Metadata {
     path: `/insights/${article.slug}`,
     type: "article",
     noindex: Boolean(article.draft),
+    image: { url: article.heroImage, alt: article.heroImageAlt },
+    publishedTime: article.publishedAt,
+    modifiedTime: article.updatedAt,
   });
 }
 
 export default function ArticlePage({ params }: ArticlePageProps) {
   const article = getArticle(params.slug);
   if (!article) notFound();
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.summary,
-    datePublished: article.publishedAt,
-    dateModified: article.updatedAt,
-    author: { "@type": "Person", name: siteContent.person.name, url: siteContent.person.website },
-    mainEntityOfPage: absoluteUrl(`/insights/${article.slug}`),
-    image: absoluteUrl(article.heroImage),
-  };
 
   return (
     <>
@@ -69,7 +59,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
             { name: "Writing", path: "/insights" },
             { name: shortTitles[article.slug] || article.title, path: `/insights/${article.slug}` },
           ]),
-          articleJsonLd,
+          articleJsonLd(article),
         ]}
       />
       <ArticleLayout article={article} />

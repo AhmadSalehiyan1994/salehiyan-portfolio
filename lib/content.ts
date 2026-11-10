@@ -56,9 +56,9 @@ const headline = "Ph.D. Candidate | Reinforcement Learning and Optimization for 
 
 export const siteMetadata = {
   // Page titles must stay under 60 characters, so the home title uses a short form of the headline.
-  title: "Ahmad Salehiyan | Ph.D. Candidate, RL and Optimization",
+  title: "Ahmad Salehiyan | Reinforcement Learning & Optimization",
   description:
-    "Ph.D. Candidate at Oklahoma State University. Reinforcement learning and optimization for decision-making under uncertainty.",
+    "Ahmad Salehiyan, Ph.D. Candidate at Oklahoma State University, researches reinforcement learning, POMDPs, and optimization for engineering systems.",
   ogImage: "/images/og-card.jpg",
   ogImageAlt:
     "Ahmad Salehiyan, Ph.D. Candidate at Oklahoma State University. Reinforcement learning and optimization for decision-making under uncertainty.",
