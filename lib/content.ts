@@ -1,46 +1,19 @@
+// Single source of truth for personal, career, and site-wide content.
+// Rule: every fact here comes from the owner's verified notes, the CV, or the
+// earlier version of the site. If a field is unknown, leave it empty ("").
+// Empty fields are not rendered anywhere.
+
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.salehiyan.com").replace(/\/$/, "");
 
-export type ProjectLink = {
-  label: string;
-  href: string;
-};
-
-export type Project = {
-  slug: string;
-  title: string;
-  domain: string;
-  description: string;
-  problem: string;
-  role: string;
-  outcome: string;
-  timeline: string;
-  impactLabel: string;
-  image: string;
-  imageAlt: string;
-  stack: string[];
-  deliverables: string[];
-  proofPoints: string[];
-  links?: ProjectLink[];
-};
+/** ISO date of the last content update. Shown in the footer and on /legal/privacy. */
+export const lastUpdated = "2026-11-10";
 
 export type ExperienceItem = {
-  highlights: string[];
   role: string;
   organization: string;
   period: string;
   summary: string;
-};
-
-export type InsightStatus = "published" | "draft";
-
-export type Insight = {
-  slug: string;
-  title: string;
-  domain: string;
-  description: string;
-  status: InsightStatus;
-  featured: boolean;
-  publishedAt?: string;
+  highlights: string[];
 };
 
 export type EducationItem = {
@@ -49,480 +22,344 @@ export type EducationItem = {
   period: string;
   focus?: string;
   advisor?: string;
-  link?: string;
 };
 
+export type SkillGroup = {
+  title: string;
+  items: string[];
+};
+
+export type TeachingItem = {
+  course: string;
+  terms: string;
+  role: string;
+  details: string;
+  students?: string;
+};
+
+export type NewsItem = {
+  /** ISO date used for sorting. Use the first day of the year when only the year is known. */
+  sortDate: string;
+  /** Date text shown to visitors. */
+  displayDate: string;
+  text: string;
+  href?: string;
+};
+
+export type EvidenceBullet = {
+  text: string;
+  href: string;
+  linkLabel: string;
+};
+
+const headline = "Ph.D. Candidate | Reinforcement Learning and Optimization for Decision-Making Under Uncertainty";
+
 export const siteMetadata = {
-  "title": "Ahmad Salehiyan | Machine Learning and Decision-Making Under Uncertainty",
-  "description": "Ph.D. researcher at Oklahoma State University working on machine learning, deep reinforcement learning, and stochastic optimization, with applications in health data analytics and engineering systems."
+  // Page titles must stay under 60 characters, so the home title uses a short form of the headline.
+  title: "Ahmad Salehiyan | Ph.D. Candidate, RL and Optimization",
+  description:
+    "Ph.D. Candidate at Oklahoma State University. Reinforcement learning and optimization for decision-making under uncertainty.",
+  ogImage: "/images/og-card.jpg",
+  ogImageAlt:
+    "Ahmad Salehiyan, Ph.D. Candidate at Oklahoma State University. Reinforcement learning and optimization for decision-making under uncertainty.",
 };
 
 export const siteContent = {
   person: {
     name: "Ahmad Salehiyan",
-    role: "Ph.D. Researcher in Industrial Engineering and Management",
-    shortBio:
-      "I am a Ph.D. researcher in Industrial Engineering and Management at Oklahoma State University (expected Summer 2027), with concurrent graduate training in Applied Statistics. My research combines machine learning, deep reinforcement learning, and stochastic optimization for data-driven decision-making under uncertainty. My published work includes an analysis of comorbidity and mortality patterns in the MIMIC-IV electronic health records dataset (179,524 adult patients) and transformer-based deep learning models in two peer-reviewed journals.",
+    title: "Ph.D. Candidate",
+    headline,
+    affiliation: "Oklahoma State University",
+    department: "School of Industrial Engineering and Management",
     location: "Stillwater, Oklahoma, USA",
-    timeZone: "America/Chicago",
-    typicalResponseTime: "Usually replies within 24 hours",
     email: "ahmad@salehiyan.com",
-    phone: "+1 (405) 269-3549",
-    linkedin: "https://www.linkedin.com/in/ahmad-salehiyan",
-    github: "https://github.com/ahmadsalehiyan",
-    scholar: "https://scholar.google.com/citations?user=_-hRiskAAAAJ",
     website: siteUrl,
-    telegram: "https://t.me/AhmadSalehiyan",
-    whatsapp: "https://wa.me/14052693549",
-    cvPath: "/cv",
-    image: "/images/first.png",
-    imageAlt: "Ahmad Salehiyan - Ph.D. Researcher",
-    researchInterests: "health data analytics and electronic health records; predictive modeling and risk stratification; deep learning and deep reinforcement learning; sequential decision-making under uncertainty (MDP/POMDP); stochastic optimization.",
+    linkedin: "https://www.linkedin.com/in/ahmad-salehiyan",
+    scholar: "https://scholar.google.com/citations?user=_-hRiskAAAAJ",
+    // ORCID iD URL, for example "https://orcid.org/0000-0000-0000-0000". Leave empty until confirmed.
+    orcid: "",
+    // GitHub profile URL. Leave empty until at least two public repositories exist.
+    github: "",
+    image: "/images/ahmad-salehiyan.webp",
+    imageAlt: "Portrait of Ahmad Salehiyan",
+    imageWidth: 900,
+    imageHeight: 1549,
   },
-  hero: {
-    tagline: "Hi, I'm Ahmad",
-    valueProposition:
-      "Ph.D. researcher in Industrial Engineering and Management at Oklahoma State University. I build machine learning and optimization methods for decision-making under uncertainty, with applications in health data analytics and engineering systems.",
-    audienceLine: "Health data analytics and engineering systems.",
-    specialties: ["Machine Learning", "Deep Reinforcement Learning", "Stochastic Optimization"],
-    availabilityMessage: "Open to projects in maintenance systems, operational analytics, and decision-support optimization.",
-  },
-  metrics: [
-  {
-    "label": "MIMIC-IV adult patients",
-    "value": "179,524",
-    "note": "Electronic health records cohort"
-  },
-  {
-    "label": "Distinct diseases",
-    "value": "846",
-    "note": "MIMIC-IV comorbidity analysis"
-  },
-  {
-    "label": "Association rules",
-    "value": "628",
-    "note": "Confidence above 50%"
-  },
-  {
-    "label": "Picker travel distance improvement",
-    "value": "3.0%–15.4%",
-    "note": "Versus S-shape and largest-gap heuristics"
-  }
-],
-  trustStrip: [
-    "PhD in Industrial Engineering & Management (Expected Summer 2027) - Oklahoma State University",
-    "M.Sc. Industrial Engineering (2019-2022) - K.N. Toosi University of Technology",
-    "Focus areas - reliability, stochastic modeling, and industrial decision support",
-  ],
-  proofSignals: [
-    {
-      title: "Academic Depth",
-      detail: "PhD research in reliability engineering and decision-focused analytics at Oklahoma State University.",
-    },
-    {
-      title: "Applied Delivery",
-      detail: "Portfolio work shaped around maintenance reporting, optimization models, and machine-learning pilots.",
-    },
-    {
-      title: "Production Mindset",
-      detail: "I translate research and technical methods into artifacts teams can review, reuse, and act on.",
-    },
-  ],
-  projects: [
-{
-  "slug": "disease-cluster-analysis-mimic-iv",
-  "title": "Disease Cluster Analysis in Electronic Health Records (MIMIC-IV)",
-  "domain": "Health Data Analytics",
-  "description": "Cohort of 179,524 adult patients (ages 18–91), 11,733 mortality cases, 846 distinct diseases. Apriori association rule mining (minimum support 0.01) found 628 association rules with confidence above 50%. k-means clustering after t-SNE, k = 4 by silhouette analysis (score 0.44). Published in IISE Annual Conference & Expo proceedings, 2025.",
-  "problem": "Comorbidity and mortality patterns in electronic health records.",
-  "role": "Apriori association rule mining (minimum support 0.01), t-SNE, and k-means clustering; k = 4 by silhouette analysis (score 0.44).",
-  "outcome": "628 association rules with confidence above 50%; published in IISE Annual Conference & Expo proceedings, 2025.",
-  "timeline": "2025",
-  "impactLabel": "628 association rules with confidence above 50%; published in IISE Annual Conference & Expo proceedings, 2025.",
-  "image": "/images/AI.jpg",
-  "imageAlt": "Disease Cluster Analysis in Electronic Health Records (MIMIC-IV)",
-  "stack": [
-    "EHR",
-    "MIMIC-IV",
-    "Python",
-    "clustering"
-  ],
-  "deliverables": [
-    "628 association rules with confidence above 50%; published in IISE Annual Conference & Expo proceedings, 2025."
-  ],
-  "proofPoints": [
-    "179,524 adult patients (ages 18–91)",
-    "11,733 mortality cases and 846 distinct diseases"
-  ]
-},
-{
-  "slug": "transformer-anomaly-intrusion-detection",
-  "title": "Transformer-Based Deep Learning for Anomaly and Intrusion Detection",
-  "domain": "Deep Learning",
-  "description": "Hybrid Transformer–GAN–Autoencoder evaluated on WUSTL-IIoT-2021, EdgeIIoTset, and TON_IoT (Future Internet, 2025); Transformer and deep reinforcement learning framework for false data injection detection (Computers, Materials & Continua, 2026).",
-  "problem": "Anomaly, intrusion, and false data injection detection in engineering systems.",
-  "role": "Developed hybrid Transformer–GAN–Autoencoder and evolutionary-optimized Transformer–deep reinforcement learning frameworks.",
-  "outcome": "Published in Future Internet (2025) and Computers, Materials & Continua (2026).",
-  "timeline": "2025–2026",
-  "impactLabel": "Published in Future Internet (2025) and Computers, Materials & Continua (2026).",
-  "image": "/images/AI.jpg",
-  "imageAlt": "Transformer-Based Deep Learning for Anomaly and Intrusion Detection",
-  "stack": [
-    "deep learning",
-    "transformers",
-    "PyTorch"
-  ],
-  "deliverables": [
-    "Published in Future Internet (2025) and Computers, Materials & Continua (2026)."
-  ],
-  "proofPoints": [
-    "Evaluated on WUSTL-IIoT-2021, EdgeIIoTset, and TON_IoT",
-    "False data injection detection in smart water infrastructure"
-  ]
-},
-{
-  "slug": "hierarchical-ddqn-warehouse-routing",
-  "title": "Hierarchical Deep Reinforcement Learning for Warehouse Picker Routing",
-  "domain": "Reinforcement Learning",
-  "description": "Dynamic programming within aisles, DDQN across aisles; 3.0%–15.4% improvement in travel distance over S-shape and largest-gap heuristics. SSRN preprint.",
-  "problem": "Picker routing in two-block warehouses.",
-  "role": "Dynamic programming within aisles; a hierarchical DDQN agent sequences aisles.",
-  "outcome": "3.0%–15.4% improvement in total travel distance over S-shape and largest-gap heuristics.",
-  "timeline": "SSRN preprint",
-  "impactLabel": "3.0%–15.4% improvement in total travel distance over S-shape and largest-gap heuristics.",
-  "image": "/images/RL.PNG",
-  "imageAlt": "Hierarchical Deep Reinforcement Learning for Warehouse Picker Routing",
-  "stack": [
-    "reinforcement learning",
-    "DDQN"
-  ],
-  "deliverables": [
-    "3.0%–15.4% improvement in total travel distance over S-shape and largest-gap heuristics."
-  ],
-  "proofPoints": [
-    "Dynamic programming for aisle-level subproblems",
-    "SSRN preprint No. 7052096"
-  ]
-},
-{
-  "slug": "multi-sensor-pomdp-maintenance",
-  "title": "Multi-Sensor Condition-Based Maintenance under Partial Observability",
-  "domain": "Decision-Making",
-  "description": "POMDP model with control-limit policies. TechRxiv preprint, 2024.",
-  "problem": "Equipment health evolution under partial sensor observations.",
-  "role": "Implemented a POMDP model using multiple sensor streams and derived control-limit policies.",
-  "outcome": "TechRxiv preprint, 2024.",
-  "timeline": "2024",
-  "impactLabel": "TechRxiv preprint, 2024.",
-  "image": "/images/maintenance.jpg",
-  "imageAlt": "Multi-Sensor Condition-Based Maintenance under Partial Observability",
-  "stack": [
-    "POMDP",
-    "decision-making"
-  ],
-  "deliverables": [
-    "TechRxiv preprint, 2024."
-  ],
-  "proofPoints": [
-    "Belief-state aggregation and state-space compression",
-    "Control-limit policies for operate-versus-preventive-maintenance decisions"
-  ]
-},
-    {
-      slug: "maintenance-reporting-system",
-      title: "Maintenance Reporting System",
-      domain: "Reliability & Operations",
-      description:
-        "Designed a structured reporting workflow to track maintenance performance and support planning decisions.",
-      problem: "Maintenance information was fragmented across reports and spreadsheets, slowing root-cause analysis and planning quality.",
-      role: "Designed the reporting structure, KPI logic, and dashboard-ready outputs used to translate raw work-order activity into management insight.",
-      outcome:
-        "Delivered a consistent reporting architecture that made recurring issues easier to identify and gave teams a clearer view of maintenance performance.",
-      timeline: "2022 - 2023",
-      impactLabel: "Structured KPI architecture for faster maintenance decisions",
-      image: "/images/maintenance.jpg",
-      imageAlt: "Maintenance reporting dashboard concept",
-      stack: ["Reporting Workflows", "Data Structuring", "Operations Analytics"],
-      deliverables: [
-        "Maintenance KPI dictionary and reporting definitions",
-        "Dashboard-ready data structure for periodic review",
-        "Escalation logic for recurring issue visibility",
-      ],
-      proofPoints: [
-        "Standardized maintenance performance reporting across stakeholders",
-        "Shortened the path from raw work-order data to manager-ready insight",
-        "Created a reusable reporting foundation for future dashboarding",
-      ],
-      links: [{ label: "View legacy archive", href: "/maintenance/ManagementReporting/index.html" }],
-    },
-    {
-      slug: "integer-programming-models",
-      title: "Integer Programming for Planning Decisions",
-      domain: "Optimization",
-      description:
-        "Implemented optimization models and decomposition workflows to structure complex planning and resource-allocation problems.",
-      problem: "Complex planning decisions required formal optimization models rather than ad-hoc heuristics or spreadsheet-based reasoning.",
-      role: "Built and documented model formulations, decomposition-based solution strategies, and reusable artifacts for future experiments and teaching.",
-      outcome:
-        "Produced a reusable optimization toolkit that clarifies how different formulations and decomposition methods support structured planning decisions.",
-      timeline: "2021 - 2024",
-      impactLabel: "Reusable decomposition-ready models for structured planning problems",
-      image: "/images/INT.png",
-      imageAlt: "Integer programming and optimization illustration",
-      stack: ["GAMS", "Integer Programming", "Decomposition Methods"],
-      deliverables: [
-        "Integer model formulations in GAMS",
-        "Worked examples for Benders, Branch-and-Bound, and Dantzig-Wolfe",
-        "Reference materials for future planning studies and prototypes",
-      ],
-      proofPoints: [
-        "Converted abstract planning questions into formal optimization models",
-        "Documented multiple solution strategies side by side for comparison",
-        "Created reference artifacts reusable for teaching and prototyping",
-      ],
-      links: [{ label: "View legacy archive", href: "/Integer%20Programming/index.html" }],
-    },
-    {
-      slug: "machine-learning-learning-path",
-      title: "Machine Learning for Maintenance and Decision Support",
-      domain: "Machine Learning",
-      description:
-        "Curated supervised, unsupervised, and reinforcement learning examples for practical industrial and decision-support use cases.",
-      problem: "The available learning materials were fragmented, making it harder to connect machine-learning theory to real operational applications.",
-      role: "Built examples, structured the learning path, and translated technical concepts into implementation-oriented notes for future predictive use cases.",
-      outcome:
-        "Created a practical machine-learning foundation that supports future predictive-maintenance pilots and gives collaborators a clearer starting point.",
-      timeline: "2021 - 2024",
-      impactLabel: "Practical ML reference track for predictive maintenance use cases",
-      image: "/images/AI.jpg",
-      imageAlt: "Machine learning concept visualization",
-      stack: ["Python", "Supervised Learning", "Unsupervised Learning", "Reinforcement Learning"],
-      deliverables: [
-        "Supervised, unsupervised, and reinforcement learning examples",
-        "Application notes for industrial and maintenance contexts",
-        "Experiment-ready artifacts for teaching and prototyping",
-      ],
-      proofPoints: [
-        "Bridged theory with operational use cases relevant to maintenance work",
-        "Organized the content into a reusable learning path rather than disconnected examples",
-        "Created a stronger base for future predictive-maintenance pilots",
-      ],
-      links: [{ label: "View legacy archive", href: "/Machin%20learning/index.html" }],
-    },
-  ] as Project[],
 
-  insights: [
+  documents: {
+    academicCv: "/files/Ahmad-Salehiyan-CV.pdf",
+    // Path of the industry resume PDF under /public. Leave empty until the resume is approved.
+    industryResume: "",
+  },
+
+  hero: {
+    summary:
+      "I develop reinforcement learning and optimization methods for sequential decisions under uncertainty, with applications in maintenance planning, warehouse logistics, and health data.",
+    jobMarketBanner:
+      "On the 2026 to 2027 job market for postdoc, faculty, and industry research roles. Available June 2027.",
+  },
+
+  about: {
+    // Two-sentence research summary for the home page. The long version lives in lib/research.ts.
+    researchSummary:
+      "I study sequential decision-making under uncertainty: how to act well when the state of a system is only partly observed and resources are shared. My work combines POMDP models, deep and multi-agent reinforcement learning, and stochastic optimization, with applications in condition-based maintenance, warehouse picker routing, and health and industrial data.",
+    availability: "Available full time from June 2027. Open to relocation anywhere in the U.S.",
+  },
+
+  recruiterSummary:
+    "I am looking for data scientist, operations research scientist, and research scientist roles, as well as postdoc and faculty positions. My core methods are reinforcement learning (DQN/DDQN, MAPPO), MDP and POMDP models, mixed-integer optimization, and statistical modeling in Python, R, and SAS. I am available full time from June 2027 and open to relocation anywhere in the U.S.",
+
+  industryBullets: [
     {
-      slug: "machine-learning",
-      title: "Machine Learning for Industrial Reliability: From Theory to Deployment",
-      domain: "Machine Learning",
-      description:
-        "A deployment-focused guide to supervised, unsupervised, and reinforcement learning for reliability-centered operations.",
-      status: "published",
-      featured: true,
-      publishedAt: "2024-03-15",
+      text: "Reinforcement learning for operational decisions. I built a hierarchical DDQN agent for warehouse picker routing that shortened total travel distance by 3.0% to 15.4% against S-shape and largest-gap heuristics.",
+      href: "/projects/hierarchical-ddqn-warehouse-routing",
+      linkLabel: "Picker routing project",
     },
     {
-      slug: "integer-programming",
-      title: "Integer Programming for High-Stakes Planning Decisions",
-      domain: "Optimization",
-      description:
-        "How mixed-integer formulation quality and classical methods improve discrete planning, allocation, and scheduling outcomes.",
-      status: "published",
-      featured: true,
-      publishedAt: "2024-02-10",
+      text: "Decisions from noisy sensor data. I model equipment health as a POMDP and derive control-limit policies for operate-versus-maintain decisions from multiple sensor signals.",
+      href: "/projects/multi-sensor-pomdp-maintenance",
+      linkLabel: "POMDP maintenance project",
     },
     {
-      slug: "maintenance-management",
-      title: "Maintenance Management Systems That Scale with Operational Complexity",
-      domain: "Reliability & Operations",
-      description:
-        "A practical framework for service-level-driven maintenance strategy, work-order quality, and CMMS-enabled execution.",
-      status: "published",
-      featured: true,
-      publishedAt: "2024-01-18",
+      text: "Machine learning on large real data. I co-authored an association rule mining and clustering study of 179,524 adult patients in the MIMIC-IV electronic health records data set.",
+      href: "/projects/disease-cluster-analysis-mimic-iv",
+      linkLabel: "MIMIC-IV project",
     },
     {
-      slug: "maintenance-kpis",
-      title: "Designing maintenance KPIs that actually influence decisions",
-      domain: "Reliability & Operations",
-      description: "How to structure KPIs so they drive actionable insights, not vanity metrics.",
-      status: "draft",
-      featured: false,
+      text: "Deep learning models, trained and published. My transformer-based intrusion detection models were evaluated on three public industrial IoT benchmark data sets and published in two journals.",
+      href: "/projects/transformer-anomaly-intrusion-detection",
+      linkLabel: "Intrusion detection project",
     },
-    {
-      slug: "decomposition-when",
-      title: "When decomposition methods outperform direct optimization",
-      domain: "Optimization",
-      description: "Understanding when to use Benders, Dantzig-Wolfe, and other decomposition approaches.",
-      status: "draft",
-      featured: false,
-    },
-    {
-      slug: "small-data-overfitting",
-      title: "Avoiding overfitting in small industrial datasets",
-      domain: "Machine Learning",
-      description: "Practical techniques for building robust models with limited data.",
-      status: "draft",
-      featured: false,
-    },
-  ] as Insight[],
+  ] as EvidenceBullet[],
+
   experience: [
-  {
-    "role": "Graduate Research Assistant",
-    "organization": "Oklahoma State University",
-    "period": "Aug 2023 – Present",
-    "summary": "Research in machine learning, deep reinforcement learning, and stochastic optimization for decision-making under uncertainty. Advisor: Dr. Akash Deep.",
-    "highlights": [
-      "Co-authored the MIMIC-IV comorbidity and mortality study published in the IISE Annual Conference proceedings (2025).",
-      "Developed POMDP-based multi-sensor maintenance policies and hierarchical DDQN warehouse picker routing."
-    ]
-  },
-  {
-    "role": "Graduate Teaching Assistant / Instructor",
-    "organization": "Oklahoma State University",
-    "period": "2025 – Present",
-    "summary": "Courses: ENGR 1412 Introductory Engineering Computer Programming (Fall 2026), Python Programming (Fall 2025), Engineering Economics (Summer 2025), Python for Data Analysis (Spring 2025).",
-    "highlights": [
-      "Fall 2026: weekly Excel assignments, grading, and help sessions for ENGR 1412 lab sections.",
-      "Taught Python Programming, Engineering Economics, and Python for Data Analysis in 2025."
-    ]
-  },
-  {
-    "role": "Research Assistant",
-    "organization": "K. N. Toosi University of Technology",
-    "period": "Oct 2018 – Apr 2020",
-    "summary": "Engineered time-domain, frequency-domain, and wavelet-based features from sensor signals for early fault detection in industrial machinery.",
-    "highlights": [
-      "Used feature-importance analysis to identify critical signals.",
-      "Designed statistical thresholds for fault diagnosis."
-    ]
-  },
-  {
-    "role": "Industrial Engineer",
-    "organization": "Karin Crane Company",
-    "period": "Apr 2019 – Oct 2019",
-    "summary": "Coordinated process improvements and documented operational workflows across production teams; supported resource planning, scheduling, and quality control.",
-    "highlights": [
-      "Documented operational workflows and coordinated process improvements.",
-      "Supported resource planning, scheduling, and quality control."
-    ]
-  }
-] as ExperienceItem[],
+    {
+      role: "Graduate Research Assistant",
+      organization: "Oklahoma State University",
+      period: "Aug 2023 to present",
+      summary:
+        "Research on machine learning, deep reinforcement learning, and stochastic optimization for decision-making under uncertainty. Advisor: Dr. Akash Deep.",
+      highlights: [
+        "Designed a POMDP-based framework for condition-based maintenance with multiple sensor streams.",
+        "Built a hierarchical DDQN framework for warehouse picker routing and ran its training pipeline on a dual-GPU workstation.",
+        "Co-authored the MIMIC-IV comorbidity and mortality study published in the IISE Annual Conference proceedings (2025).",
+      ],
+    },
+    {
+      role: "Graduate Teaching Assistant",
+      organization: "Oklahoma State University",
+      period: "2025 to present",
+      summary:
+        "Teaching assistant for ENGR 1412 Introductory Engineering Computer Programming (Spring 2026 and Fall 2026) and Engineering Economics help sessions (Summer 2026).",
+      highlights: [],
+    },
+    {
+      role: "Research Assistant",
+      organization: "K. N. Toosi University of Technology",
+      period: "Oct 2018 to Apr 2020",
+      summary:
+        "Engineered time-domain, frequency-domain, and wavelet-based features from sensor signals for early fault detection in industrial machinery.",
+      highlights: [],
+    },
+    {
+      role: "Industrial Engineer",
+      organization: "Karin Crane Company",
+      period: "Apr 2019 to Oct 2019",
+      summary:
+        "Coordinated process improvements and documented operational workflows across production teams. Supported resource planning, scheduling, and quality control.",
+      highlights: [],
+    },
+  ] as ExperienceItem[],
+
   education: [
-  {
-    "degree": "Ph.D., Industrial Engineering and Management",
-    "institution": "Oklahoma State University",
-    "period": "Expected Summer 2027",
-    "advisor": "Dr. Akash Deep",
-    "focus": "Dissertation (proposed): “Sequential Decision-Making Under Uncertainty in Smart Engineering Systems.”",
-    "link": "https://ceat.okstate.edu/iem"
-  },
-  {
-    "degree": "M.S., Applied Statistics",
-    "institution": "Oklahoma State University",
-    "period": "Expected 2026",
-    "focus": "Experimental design, statistical programming (R/SAS), data analytics, and statistical inference."
-  },
-  {
-    "degree": "M.S., Industrial Engineering",
-    "institution": "K. N. Toosi University of Technology, Tehran",
-    "period": "2019–2022",
-    "focus": "Thesis: “Predictive Maintenance of Advanced Industrial Machines Using AI Techniques.”",
-    "advisor": "Dr. Abdollah Aghaie"
-  },
-  {
-    "degree": "B.S., Industrial Engineering",
-    "institution": "Islamic Azad University, Qazvin",
-    "period": "2014–2019"
-  }
-] as EducationItem[],
-  certifications: [
-    "Google Data Analytics Certificate",
-    "Python Programming Certificate",
-    "Machine Learning Certificate",
-  ],
+    {
+      degree: "Ph.D., Industrial Engineering and Management",
+      institution: "Oklahoma State University",
+      period: "Fall 2023 to present (expected Summer 2027)",
+      advisor: "Dr. Akash Deep",
+      focus: "Dissertation proposal: \"Sequential Decision-Making Under Uncertainty in Smart Engineering Systems.\"",
+    },
+    {
+      degree: "M.S., Applied Statistics",
+      institution: "Oklahoma State University",
+      period: "Expected Fall 2026 (concurrent)",
+      focus: "Experimental design, statistical programming (R and SAS), data analytics, and statistical inference.",
+    },
+    {
+      degree: "M.S., Industrial Engineering",
+      institution: "K. N. Toosi University of Technology, Tehran",
+      period: "2019 to 2022",
+      advisor: "Dr. Abdollah Aghaie",
+      focus: "Thesis: \"Predictive Maintenance of Advanced Industrial Machines Using AI Techniques.\"",
+    },
+    {
+      degree: "B.S., Industrial Engineering",
+      institution: "Azad University, Qazvin",
+      period: "2014 to 2019",
+    },
+  ] as EducationItem[],
+
+  additionalTraining: "Additional training: ISO 9001:2015 Quality Management Systems.",
+
   skillGroups: [
-  {
-    "title": "Analytics programming",
-    "items": [
-      "Python (NumPy, SciPy, pandas, PyTorch, Gym)",
-      "R",
-      "SAS",
-      "Julia",
-      "GAMS",
-      "Pyomo"
-    ]
+    {
+      title: "Reinforcement learning and sequential decisions",
+      items: ["DQN/DDQN", "MAPPO", "MDP/POMDP", "Value and policy iteration", "Ray RLlib", "PettingZoo", "Gymnasium"],
+    },
+    {
+      title: "Machine learning and deep learning",
+      items: [
+        "PyTorch",
+        "Transformers",
+        "GANs",
+        "Autoencoders",
+        "scikit-learn",
+        "Anomaly detection",
+        "Clustering",
+        "t-SNE",
+        "Association rule mining",
+      ],
+    },
+    {
+      title: "Optimization",
+      items: [
+        "Mixed-integer and linear programming",
+        "Benders and Lagrangian decomposition",
+        "Monte Carlo simulation",
+        "Pyomo",
+        "GAMS",
+      ],
+    },
+    {
+      title: "Statistics",
+      items: ["R", "SAS", "Experimental design", "Statistical inference", "Hawkes processes"],
+    },
+    {
+      title: "Data and compute",
+      items: [
+        "Python",
+        "SQL/PostgreSQL",
+        "Apache Spark/PySpark (coursework level)",
+        "HPC cluster",
+        "GPU training",
+        "Git",
+        "LaTeX",
+        "Julia",
+      ],
+    },
+    {
+      title: "Visualization",
+      items: ["Power BI", "Tableau", "Excel"],
+    },
+  ] as SkillGroup[],
+
+  teaching: {
+    intro:
+      "I am a graduate teaching assistant in the School of Industrial Engineering and Management at Oklahoma State University.",
+    courses: [
+      {
+        course: "ENGR 1412 Introductory Engineering Computer Programming",
+        terms: "Spring 2026 and Fall 2026",
+        role: "Teaching assistant",
+        details: "I prepare and post weekly Excel assignments, grade them, and run help sessions for the lab sections.",
+      },
+      {
+        course: "Engineering Economics",
+        terms: "Summer 2026",
+        role: "Help session leader",
+        details: "I ran help sessions for the course.",
+        students: "50 students",
+      },
+    ] as TeachingItem[],
+    // Two to four short points about teaching approach. Empty until the owner provides them.
+    approach: [] as string[],
   },
-  {
-    "title": "Databases and large-scale data",
-    "items": [
-      "SQL and PostgreSQL (relational databases)",
-      "Apache Spark / PySpark (coursework level)",
-      "High-performance computing cluster",
-      "GPU model training"
-    ]
+
+  service: {
+    reviewing: "Peer reviewer for academic journals in operations research, maintenance engineering, and industrial systems.",
+    // Journal names with review counts, for example "Reliability Engineering & System Safety (2 reviews)".
+    journals: [] as string[],
+    memberships: [
+      "INFORMS (since 2024)",
+      "IISE and the IISE Reliability and Maintenance Society (since 2024)",
+      "SME (Society of Manufacturing Engineers)",
+    ],
   },
-  {
-    "title": "Machine learning and deep learning",
-    "items": [
-      "Transformer architectures (the model family underlying large language models)",
-      "Generative adversarial networks",
-      "Autoencoders",
-      "Deep Q-networks (DQN, DDQN)",
-      "k-means clustering",
-      "Association rule mining (Apriori)",
-      "t-SNE",
-      "Anomaly detection",
-      "Time-series feature extraction"
-    ]
-  },
-  {
-    "title": "Health data",
-    "items": [
-      "Electronic health records (MIMIC-IV)",
-      "Coded diagnosis data",
-      "Comorbidity and mortality analysis"
-    ]
-  },
-  {
-    "title": "Decision-making and optimization",
-    "items": [
-      "MDP",
-      "POMDP",
-      "Monte Carlo simulation",
-      "Mixed-integer and linear programming",
-      "Benders and Lagrangian decomposition",
-      "Value and policy iteration"
-    ]
-  },
-  {
-    "title": "Research tools and existing tools",
-    "items": [
-      "Git/GitHub",
-      "LaTeX",
-      "Simulation environments",
-      "Experiment logging",
-      "JavaScript",
-      "HTML/CSS",
-      "Scikit-Learn",
-      "Power BI",
-      "Tableau",
-      "Primavera P6",
-      "Excel",
-      "Anaconda",
-      "jQuery"
-    ]
-  }
-],
-  skills: {
-    languages: ["Python", "Julia", "R", "GAMS", "JavaScript", "HTML/CSS"],
-    methods: ["Integer Programming", "Decomposition Methods", "Stochastic Modeling", "Machine Learning", "Data Analysis"],
-    tools: ["GAMS", "Python (NumPy, Pandas, Scikit-Learn)", "Tableau", "Excel", "LaTeX"],
-    specializations: ["Maintenance Planning", "Reliability Engineering", "Operations Analytics", "Predictive Modeling"],
+
+  leadership: [
+    {
+      role: "President",
+      organization: "Iranian Student Association (IRSA), Oklahoma State University",
+      period: "2025 to present (second year)",
+    },
+    {
+      role: "Co-founder and executive",
+      organization: "ISA-Alliance, a national network of Iranian student associations",
+      period: "",
+    },
+  ],
+
+  awards: [
+    {
+      title: "3rd Place, Graduate Poster Category",
+      organization: "OSU Student Research Symposium",
+      year: "2024",
+    },
+  ],
+
+  news: [
+    {
+      sortDate: "2026-11-01",
+      displayDate: "Nov 1, 2026",
+      text: "Talk at the INFORMS Annual Meeting (session SA20): \"Hierarchical Decision-Making for Condition-Based Maintenance of Large-Scale Fleets with Shared Resources.\"",
+      href: "/publications#talks",
+    },
+    {
+      sortDate: "2026-10-19",
+      displayDate: "Oct 19, 2026",
+      text: "Passed my dissertation proposal defense: \"Sequential Decision-Making Under Uncertainty in Smart Engineering Systems.\"",
+      href: "/research",
+    },
+    {
+      sortDate: "2026-03-12",
+      displayDate: "Mar 12, 2026",
+      text: "New journal article in Computers, Materials & Continua on false data injection detection in smart water infrastructure.",
+      href: "/publications#cmc-2026",
+    },
+    {
+      sortDate: "2025-06-24",
+      displayDate: "Jun 24, 2025",
+      text: "New journal article in Future Internet on intrusion detection in edge and industrial IoT systems.",
+      href: "/publications#future-internet-2025",
+    },
+    {
+      sortDate: "2025-01-01",
+      displayDate: "2025",
+      text: "Paper and talk at the IISE Annual Conference & Expo in Atlanta, GA, on disease clusters in electronic health records.",
+      href: "/publications#iise-2025",
+    },
+  ] as NewsItem[],
+
+  contact: {
+    heading: "Get in touch",
+    text: "I am open to postdoc, faculty, and industry research positions, and to research collaboration. Email is the best way to reach me.",
   },
 };
 
-export function getProjectBySlug(slug: string) {
-  return siteContent.projects.find((project) => project.slug === slug);
+export function sortedNews(limit?: number) {
+  const items = siteContent.news.slice().sort((a, b) => b.sortDate.localeCompare(a.sortDate));
+  return typeof limit === "number" ? items.slice(0, limit) : items;
+}
+
+export type ProfileLink = { label: string; href: string };
+
+/** External profile links. Entries with an empty URL are skipped. */
+export function profileLinks(): ProfileLink[] {
+  const { person } = siteContent;
+  return [
+    { label: "Google Scholar", href: person.scholar },
+    { label: "ORCID", href: person.orcid },
+    { label: "LinkedIn", href: person.linkedin },
+    { label: "GitHub", href: person.github },
+  ].filter((link) => Boolean(link.href));
 }

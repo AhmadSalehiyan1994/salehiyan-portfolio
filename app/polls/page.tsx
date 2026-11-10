@@ -22,7 +22,7 @@ export default function PollsPage() {
         Vote, learn, and help prioritize upcoming content
       </h1>
       <p className="mt-4 max-w-3xl text-muted-foreground">
-        Polls are public to browse. Members can vote once per poll and unlock result visibility based on poll rules.
+        Polls are public to browse. Members can vote once per poll and see results according to the poll rules.
       </p>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -53,7 +53,7 @@ export default function PollsPage() {
             </div>
           ) : (
             <p className="mt-2 text-sm text-muted-foreground">
-              Sign in to vote, track your participation, and unlock member-only activity history.
+              Sign in to vote, track your participation, and see your activity history.
             </p>
           )}
         </div>

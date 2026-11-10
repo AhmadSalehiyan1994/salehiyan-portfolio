@@ -1,26 +1,30 @@
 import type { MetadataRoute } from "next";
-import { siteContent } from "@/lib/content";
+import { lastUpdated, siteContent } from "@/lib/content";
+import { publishedArticles } from "@/lib/articles";
+import { projects } from "@/lib/projects";
 
 const baseUrl = siteContent.person.website.replace(/\/$/, "");
 
+// Public pages only. Drafts, redirects, and removed pages are left out.
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "/",
+    "/research",
+    "/publications",
     "/projects",
-    "/contact",
-    "/cv",
+    ...projects.map((project) => `/projects/${project.slug}`),
+    "/teaching",
     "/insights",
-    "/insights/machine-learning",
-    "/insights/integer-programming",
-    "/insights/maintenance-management",
+    ...publishedArticles().map((article) => `/insights/${article.slug}`),
+    "/cv",
+    "/contact",
     "/legal/privacy",
-    ...siteContent.projects.map((project) => `/projects/${project.slug}`),
   ];
 
   return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route.startsWith("/insights/") ? "monthly" : "weekly",
-    priority: route === "/" ? 1 : route.startsWith("/insights/") ? 0.8 : 0.7,
+    url: route === "/" ? `${baseUrl}/` : `${baseUrl}${route}`,
+    lastModified: new Date(`${lastUpdated}T00:00:00Z`),
+    changeFrequency: route.startsWith("/insights/") || route === "/legal/privacy" ? "yearly" : "monthly",
+    priority: route === "/" ? 1 : route.split("/").length > 2 ? 0.6 : 0.8,
   }));
 }

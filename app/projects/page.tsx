@@ -1,41 +1,54 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { ProjectList } from "@/components/project-list";
+import Link from "next/link";
+import type { Route } from "next";
+import { ProjectCard } from "@/components/project-card";
+import { PageHeader, Section } from "@/components/section";
+import { SeoJsonLd } from "@/components/seo-json-ld";
+import { earlierWork, projects } from "@/lib/projects";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: "Case overviews focused on maintenance, optimization, and machine learning work.",
-  alternates: {
-    canonical: "/projects",
-  },
-  openGraph: {
-    title: "Projects | Ahmad Salehiyan",
-    description: "Case overviews focused on maintenance, optimization, and machine learning work.",
-    url: "/projects",
-    images: [
-      {
-        url: "/images/first.png",
-        width: 1200,
-        height: 630,
-        alt: "Selected projects",
-      },
-    ],
-  },
-};
+export const metadata = pageMetadata({
+  title: "Projects | Ahmad Salehiyan",
+  description:
+    "Research projects by Ahmad Salehiyan: fleet maintenance with safe MARL, warehouse picker routing, POMDP maintenance, MIMIC-IV, intrusion detection.",
+  path: "/projects",
+});
 
+// This page is a server component. Every project title is in the HTML response.
 export default function ProjectsPage() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-      <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">Projects</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Selected case overviews</h1>
-      <p className="mt-4 max-w-3xl text-muted-foreground">
-        A focused set of projects where modeling, data structuring, and analytics support clearer operational decisions.
-      </p>
-      <div className="mt-8">
-        <Suspense fallback={<div className="text-sm text-muted-foreground">Loading projects…</div>}>
-          <ProjectList />
-        </Suspense>
-      </div>
-    </section>
+    <>
+      <SeoJsonLd data={breadcrumbJsonLd([{ name: "Projects", path: "/projects" }])} />
+      <PageHeader title="Projects" lead="Each project page gives the result first, then the problem, the method, a diagram, the tools, and my role." />
+
+      <Section id="research-projects" title="Research projects">
+        <ul className="grid gap-4 md:grid-cols-2">
+          {projects.map((project) => (
+            <li key={project.slug}>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section id="earlier-work" title="Earlier work" className="border-b-0">
+        <ul className="max-w-3xl space-y-5">
+          {earlierWork.map((item) => (
+            <li key={item.title}>
+              <h3 className="text-base font-semibold text-foreground">
+                {item.title} <span className="font-normal text-muted-foreground">({item.period})</span>
+              </h3>
+              <p className="mt-1 text-sm leading-7 text-muted-foreground">
+                {item.description}{" "}
+                {item.link ? (
+                  <Link href={item.link.href as Route} className="prose-link">
+                    {item.link.label}
+                  </Link>
+                ) : null}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </>
   );
 }

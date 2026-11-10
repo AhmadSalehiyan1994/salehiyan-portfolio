@@ -1,49 +1,47 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { siteContent, siteMetadata } from "@/lib/content";
-import { AnalyticsScripts } from "@/components/analytics-scripts";
-import { StickyContactCta } from "@/components/sticky-contact-cta";
-import { getCurrentLanguage } from "@/lib/i18n";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
-const siteTitle = siteMetadata.title;
+// Fonts are self-hosted (SIL Open Font License). Only the body font is preloaded.
+const inter = localFont({
+  src: "./fonts/inter-latin-wght-normal.woff2",
+  variable: "--font-sans",
+  weight: "100 900",
+  display: "swap",
+  preload: true,
+});
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin-wght-normal.woff2",
+  variable: "--font-mono",
+  weight: "100 800",
+  display: "swap",
+  preload: false,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteContent.person.website),
-  title: {
-    default: siteTitle,
-    template: `%s | ${siteContent.person.name}`,
-  },
+  title: siteMetadata.title,
   description: siteMetadata.description,
-  applicationName: `${siteContent.person.name} Portfolio`,
+  applicationName: siteContent.person.name,
+  authors: [{ name: siteContent.person.name, url: siteContent.person.website }],
   openGraph: {
-    title: siteTitle,
+    title: siteMetadata.title,
     description: siteMetadata.description,
-    url: siteContent.person.website,
+    url: "/",
     siteName: siteContent.person.name,
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: siteContent.person.image,
-        width: 1200,
-        height: 630,
-        alt: `${siteContent.person.name} portfolio preview`,
-      },
-    ],
+    images: [{ url: siteMetadata.ogImage, width: 1200, height: 630, alt: siteMetadata.ogImageAlt }],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle,
+    title: siteMetadata.title,
     description: siteMetadata.description,
-    images: [siteContent.person.image],
-  },
-  alternates: {
-    canonical: "/",
+    images: [siteMetadata.ogImage],
   },
   manifest: "/manifest.webmanifest",
   icons: {
@@ -55,31 +53,30 @@ export const metadata: Metadata = {
       { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],
     shortcut: [{ url: "/favicon-32.png", type: "image/png", sizes: "32x32" }],
-    apple: [
-      { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#101012",
+  colorScheme: "dark",
+};
+
+const analyticsDisabled = process.env.NEXT_PUBLIC_DISABLE_ANALYTICS === "1";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const lang = getCurrentLanguage();
   return (
-    <html lang={lang} dir="ltr" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };",
-          }}
-        />
-        <script defer src="/_vercel/insights/script.js"></script>
-      </head>
+    <html lang="en" dir="ltr" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen font-sans">
-        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <SiteHeader />
-        <main id="main-content">{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <SiteFooter />
-        <StickyContactCta />
-        <AnalyticsScripts />
+        {analyticsDisabled ? null : <Analytics />}
       </body>
     </html>
   );
