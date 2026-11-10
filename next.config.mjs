@@ -25,13 +25,15 @@ const csp = [
 // Permanent (301) redirects. Every URL from the earlier site keeps working.
 const redirect301 = (source, destination) => ({ source, destination, statusCode: 301 });
 
+// Folder names are matched both as typed and percent-encoded, because some old links carry an encoded space.
 const legacyFolders = [
-  ["Machin%20learning", "/insights/machine-learning"],
   ["Machin learning", "/insights/machine-learning"],
-  ["Integer%20Programming", "/insights/integer-programming"],
   ["Integer Programming", "/insights/integer-programming"],
   ["maintenance", "/insights/maintenance-management"],
-];
+].flatMap(([folder, destination]) => {
+  const encoded = encodeURIComponent(folder);
+  return encoded === folder ? [[folder, destination]] : [[encoded, destination], [folder, destination]];
+});
 
 const nextConfig = {
   experimental: {

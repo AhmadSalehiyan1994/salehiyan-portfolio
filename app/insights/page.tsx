@@ -37,7 +37,7 @@ export default function WritingPage() {
               <p className="mt-3 text-sm leading-7 text-muted-foreground">{article.summary}</p>
               <Link
                 href={`/insights/${article.slug}` as Route}
-                aria-label={`Read the article: ${article.title}`}
+                aria-label={`Read article: ${article.title}`}
                 className="mt-auto inline-flex min-h-11 items-center gap-1.5 pt-3 text-sm font-medium text-primary underline-offset-4 hover:underline"
               >
                 Read article <ArrowRight className="h-4 w-4" aria-hidden="true" />

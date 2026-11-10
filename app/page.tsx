@@ -107,7 +107,7 @@ export default function HomePage() {
               <p className="mt-3 text-sm leading-7 text-muted-foreground">{theme.short}</p>
               <Link
                 href={`/research#${theme.id}` as Route}
-                aria-label={`Read more about the theme: ${theme.title}`}
+                aria-label={`Papers and projects: ${theme.title}`}
                 className="mt-auto inline-flex min-h-11 items-center pt-3 text-sm font-medium text-primary underline-offset-4 hover:underline"
               >
                 Papers and projects

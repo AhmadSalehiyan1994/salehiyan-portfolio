@@ -53,13 +53,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur">
       <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="inline-flex min-h-11 min-w-0 items-center gap-2.5 text-foreground" aria-label={`${person.name}, home`}>
+        <Link href="/" className="inline-flex min-h-11 min-w-0 items-center gap-2.5 text-foreground">
           <span className="relative hidden h-7 w-[84px] shrink-0 overflow-hidden sm:inline-block">
             <Image src="/brand/osu-system-logo.png" alt="" fill sizes="84px" className="object-contain" />
           </span>
           <span className="min-w-0 leading-tight">
             <span className="block truncate text-[17px] font-semibold tracking-tight sm:text-[19px]">{person.name}</span>
-            <span className="hidden max-w-[330px] text-[11px] font-medium leading-snug text-muted-foreground md:block lg:hidden xl:block">
+            <span className="hidden max-w-[350px] text-xs font-medium leading-snug text-muted-foreground md:block lg:hidden xl:block">
               {person.headline}
             </span>
           </span>

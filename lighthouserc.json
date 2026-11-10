@@ -5,8 +5,10 @@
       "startServerReadyPattern": "ready",
       "url": [
         "http://localhost:3000/",
-        "http://localhost:3000/insights",
-        "http://localhost:3000/polls"
+        "http://localhost:3000/research",
+        "http://localhost:3000/publications",
+        "http://localhost:3000/projects",
+        "http://localhost:3000/cv"
       ],
       "numberOfRuns": 2,
       "settings": {
