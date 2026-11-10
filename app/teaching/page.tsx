@@ -35,7 +35,7 @@ export default function TeachingPage() {
                   </div>
                 ) : null}
                 <div>
-                  <dt className="inline font-medium text-foreground">What I do: </dt>
+                  <dt className="inline font-medium text-foreground">Teaching responsibilities: </dt>
                   <dd className="inline">{course.details}</dd>
                 </div>
               </dl>

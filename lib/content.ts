@@ -150,7 +150,7 @@ export const siteContent = {
       organization: "Oklahoma State University",
       period: "2025 to present",
       summary:
-        "Teaching assistant for ENGR 1412 Introductory Engineering Computer Programming (Spring 2026 and Fall 2026) and Engineering Economics help sessions (Summer 2026).",
+        "Lab instruction for ENGR 1412 Introductory Engineering Computer Programming (Spring 2026 and Fall 2026) and instructional support through Engineering Economics help sessions (Summer 2026).",
       highlights: [],
     },
     {
@@ -255,19 +255,21 @@ export const siteContent = {
 
   teaching: {
     intro:
-      "I am a graduate teaching assistant in the School of Industrial Engineering and Management at Oklahoma State University.",
+      "As a graduate teaching assistant in the School of Industrial Engineering and Management at Oklahoma State University, I teach engineering computing through lab instruction and support student learning in engineering economics through course help sessions.",
     courses: [
       {
         course: "ENGR 1412 Introductory Engineering Computer Programming",
         terms: "Spring 2026 and Fall 2026",
-        role: "Teaching assistant",
-        details: "I prepare and post weekly Excel assignments, grade them, and run help sessions for the lab sections.",
+        role: "Graduate Teaching Assistant and Lab Instructor",
+        details:
+          "I provide lab instruction in Excel, prepare and post weekly assignments, grade student work, and lead help sessions to reinforce concepts and guide students through course problems.",
       },
       {
         course: "Engineering Economics",
         terms: "Summer 2026",
-        role: "Help session leader",
-        details: "I ran help sessions for the course.",
+        role: "Graduate Teaching Assistant",
+        details:
+          "I led course help sessions, explained engineering economics concepts, and guided students through problem-solving.",
         students: "50 students",
       },
     ] as TeachingItem[],
