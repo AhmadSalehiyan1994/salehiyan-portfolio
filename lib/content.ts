@@ -6,7 +6,7 @@
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.salehiyan.com").replace(/\/$/, "");
 
 /** ISO date of the last content update. Shown in the footer and on /legal/privacy. */
-export const lastUpdated = "2026-11-10";
+export const lastUpdated = "2026-11-12";
 
 export type ExperienceItem = {
   role: string;
@@ -76,8 +76,7 @@ export const siteContent = {
     website: siteUrl,
     linkedin: "https://www.linkedin.com/in/ahmad-salehiyan",
     scholar: "https://scholar.google.com/citations?user=_-hRiskAAAAJ",
-    // ORCID iD URL, for example "https://orcid.org/0000-0000-0000-0000". Leave empty until confirmed.
-    orcid: "",
+    orcid: "https://orcid.org/0009-0009-2877-8715",
     // GitHub profile URL. Leave empty until at least two public repositories exist.
     github: "",
     image: "/images/ahmad-salehiyan.webp",
@@ -277,9 +276,11 @@ export const siteContent = {
   },
 
   service: {
-    reviewing: "Peer reviewer for academic journals in operations research, maintenance engineering, and industrial systems.",
-    // Journal names with review counts, for example "Reliability Engineering & System Safety (2 reviews)".
-    journals: [] as string[],
+    reviewing: "Peer reviewer for academic journals, with seven reviews recorded in ORCID.",
+    journals: [
+      "Computers & Electrical Engineering (6 reviews)",
+      "Water Research (1 review)",
+    ] as string[],
     memberships: [
       "INFORMS (since 2024)",
       "IISE and the IISE Reliability and Maintenance Society (since 2024)",
