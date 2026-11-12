@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteMetadata.title,
     description: siteMetadata.description,
-    images: [siteMetadata.ogImage],
+    images: [{ url: siteMetadata.ogImage, width: 1200, height: 630, alt: siteMetadata.ogImageAlt }],
   },
   manifest: "/manifest.webmanifest",
   icons: {

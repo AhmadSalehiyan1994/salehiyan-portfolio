@@ -34,3 +34,15 @@ jobs:
         run: npm run build
         env:
           AUTH_SECRET: test-secret
+
+      - name: Audit all public pages for SEO regressions
+        run: npm run seo:audit
+
+      - name: Save SEO audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-audit
+          path: .next/seo-audit.json
+          if-no-files-found: ignore
+          retention-days: 14

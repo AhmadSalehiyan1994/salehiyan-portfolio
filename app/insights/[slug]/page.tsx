@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/article-layout";
 import { SeoJsonLd } from "@/components/seo-json-ld";
 import { articles, getArticle } from "@/lib/articles";
-import { articleJsonLd, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { articleJsonLd, articlePreviewImage, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 type ArticlePageProps = {
   params: { slug: string };
@@ -41,7 +41,7 @@ export function generateMetadata({ params }: ArticlePageProps): Metadata {
     path: `/insights/${article.slug}`,
     type: "article",
     noindex: Boolean(article.draft),
-    image: { url: article.heroImage, alt: article.heroImageAlt },
+    image: articlePreviewImage(article),
     publishedTime: article.publishedAt,
     modifiedTime: article.updatedAt,
   });

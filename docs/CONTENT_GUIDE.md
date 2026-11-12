@@ -65,4 +65,10 @@ Draft articles in `lib/articles.ts` have `draft: true`. A draft is not listed on
 
 Update `lastUpdated` at the top of `lib/content.ts`. It feeds the footer, the privacy page, and the sitemap.
 
-Run `npm run check` and `npm run build` before you push.
+Run `npm run check`, `npm run build`, and `npm run seo:audit` before you push. The SEO audit needs Chrome installed; set `CHROME_PATH` if it is not detected automatically.
+
+The audit checks every sitemap page with JavaScript disabled, unique titles and descriptions, canonicals, author markup, structured data, image accessibility, social previews, internal links and anchors, mobile and desktop overflow, crawler access, draft exclusions, legacy redirects, and real 404 responses. CI runs it after the production build and saves `.next/seo-audit.json` as an artifact. To audit production against the current build's route manifest, run `npm run seo:audit -- --url https://www.salehiyan.com`.
+
+Published articles automatically get a 1200 × 630 sharing image at `/insights/[slug]/share-image`, built from their title, author, domain, and hero image. Check the generated card when adding an article, especially if its title is long. Draft articles do not generate public sharing images.
+
+The separate Lighthouse workflow runs on pull requests and production pushes. Its seven representative pages must score 100/100 for Lighthouse SEO; other Lighthouse categories remain advisory. These checks measure technical eligibility, not search rankings or AI citations. Maintain accurate researcher profiles, original research content, and publication links as well.

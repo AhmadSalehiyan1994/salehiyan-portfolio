@@ -52,7 +52,7 @@ export function pageMetadata({ title, description, path, type = "website", noind
       card: "summary_large_image",
       title,
       description,
-      images: [preview.url],
+      images: [preview],
     },
   };
 }
@@ -72,7 +72,7 @@ export function personJsonLd() {
     givenName: "Ahmad",
     familyName: "Salehiyan",
     description: siteMetadata.description,
-    jobTitle: person.headline,
+    jobTitle: person.title,
     email: `mailto:${person.email}`,
     url: baseUrl,
     image: absoluteUrl(person.image),
@@ -128,6 +128,17 @@ export function profilePageJsonLd() {
   };
 }
 
+export function articlePreviewImage(article: Article) {
+  return article.draft
+    ? { url: article.heroImage, alt: article.heroImageAlt }
+    : {
+        url: `/insights/${article.slug}/share-image`,
+        alt: `${article.title}, by ${siteContent.person.name}`,
+        width: 1200,
+        height: 630,
+      };
+}
+
 export function articleJsonLd(article: Article) {
   const url = absoluteUrl(`/insights/${article.slug}`);
   return {
@@ -144,7 +155,7 @@ export function articleJsonLd(article: Article) {
     author: { "@type": "Person", "@id": `${baseUrl}/#person`, name: siteContent.person.name, url: `${baseUrl}/` },
     publisher: { "@type": "Person", "@id": `${baseUrl}/#person`, name: siteContent.person.name, url: `${baseUrl}/` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    image: absoluteUrl(article.heroImage),
+    image: [...new Set([absoluteUrl(article.heroImage), absoluteUrl(articlePreviewImage(article).url)])],
     citation: article.references.map((reference) => reference.href),
   };
 }
