@@ -6,7 +6,7 @@
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.salehiyan.com").replace(/\/$/, "");
 
 /** ISO date of the last content update. Shown in the footer and on /legal/privacy. */
-export const lastUpdated = "2026-11-12";
+export const lastUpdated = "2026-11-14";
 
 export type ExperienceItem = {
   role: string;
@@ -77,8 +77,8 @@ export const siteContent = {
     linkedin: "https://www.linkedin.com/in/ahmad-salehiyan",
     scholar: "https://scholar.google.com/citations?user=_-hRiskAAAAJ",
     orcid: "https://orcid.org/0009-0009-2877-8715",
-    // GitHub profile URL. Leave empty until at least two public repositories exist.
-    github: "",
+    // Verified account owns the portfolio repository and has two public repositories.
+    github: "https://github.com/AhmadSalehiyan1994",
     image: "/images/ahmad-salehiyan.webp",
     imageAlt: "Portrait of Ahmad Salehiyan",
     imageWidth: 900,

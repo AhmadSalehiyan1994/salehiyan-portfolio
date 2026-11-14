@@ -1,0 +1,8 @@
+{
+  "site": "https://www.salehiyan.com",
+  "reviewCadence": "Every 28 days; compare equal periods in Google Search Console",
+  "googleQueries": ["Ahmad Salehiyan", "Ahmad Salehiyan reinforcement learning", "Ahmad Salehiyan Oklahoma State University", "Ahmad Salehiyan maintenance planning", "Ahmad Salehiyan POMDP", "ahmad reinforcement learning", "reinforcement learning maintenance planning", "POMDP maintenance planning", "deep Q learning warehouse picker routing"],
+  "aiPrompts": ["Who is Ahmad Salehiyan and what does he research? Cite sources.", "What is Ahmad Salehiyan's work on POMDP maintenance planning? Cite sources.", "Explain Ahmad Salehiyan's hierarchical deep Q-learning method for warehouse picker routing. Cite sources.", "Which researchers work on reinforcement learning for fleet maintenance? Cite sources."],
+  "aiRecordFields": ["date", "service", "model", "searchEnabled", "exactPrompt", "freshConversation", "mentioned", "citedUrls", "factualErrors", "responseSavedAt"],
+  "notes": "Mention rate is not rank. Record each service separately. Missing observations are not zero. Repeat the same prompts in fresh conversations; do not feed the desired answer into the prompt."
+}
