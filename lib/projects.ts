@@ -29,11 +29,38 @@ export type Project = {
   /** Extra note, for example a data-sharing statement. */
   note?: string;
   featured: boolean;
+  explanation?: string[];
+  limitations?: string[];
+  questions?: { question: string; answer: string }[];
+  related?: string[];
 };
 
 export const projects: Project[] = [
   {
     slug: "multi-agent-fleet-maintenance",
+    explanation: [
+  "Reinforcement learning for maintenance planning treats a maintenance decision as one step in a longer sequence. Operating an asset today changes its future condition; maintaining it consumes resources now but can change future failure risk. A useful policy must therefore consider cumulative consequences rather than only the next decision.",
+  "In a fleet, these decisions interact. Independent policies can request the same limited maintenance resources at the same time. This dissertation studies decentralized agents with shared constraints, using a two-phase design that separates exploration with soft constraints from enforcement with hard constraints."
+],
+    limitations: [
+  "This is ongoing dissertation research, not a completed deployment or a published performance comparison. No numerical improvement or safety guarantee is claimed here.",
+  "Evaluation must distinguish performance during exploration from performance after constraint enforcement. Transfer to an operating fleet would also require validation of the simulator, resource assumptions, and failure models."
+],
+    questions: [
+  {
+    "question": "How does fleet maintenance differ from single-machine maintenance?",
+    "answer": "A fleet introduces shared resources and coupled decisions. A maintenance action that is appropriate for one asset may be infeasible when other assets need the same resources."
+  },
+  {
+    "question": "Are results and implementation code available?",
+    "answer": "The manuscript is in preparation and this page does not report results. No public implementation is linked. Contact Ahmad Salehiyan to discuss the research."
+  }
+],
+    related: [
+  "multi-sensor-pomdp-maintenance",
+  "hierarchical-ddqn-warehouse-routing"
+],
+
     title: "Multi-Agent Fleet Maintenance with Safe Reinforcement Learning",
     shortTitle: "Multi-agent fleet maintenance",
     domain: "Dissertation research",
@@ -63,6 +90,31 @@ export const projects: Project[] = [
   },
   {
     slug: "hierarchical-ddqn-warehouse-routing",
+    explanation: [
+  "Warehouse picker routing asks how to visit all required pick locations with a short route. In a two-block warehouse, local movement inside aisles and the order in which aisles are visited both affect total travel. The hierarchical approach separates these decisions.",
+  "Dynamic programming handles the aisle-level subproblems. At the upper level, a Double Deep Q-Network chooses the aisle sequence. This division lets the learning component focus on sequencing while using a structured solver for the local routing work.",
+  "The reported comparison uses S-shape and largest-gap heuristics as baselines. The 3.0% to 15.4% range refers to shorter total travel distance in the evaluated settings; it does not measure labor-cost savings or prove optimality."
+],
+    limitations: [
+  "The study concerns picker routing in two-block warehouses. Results should not be assumed to generalize unchanged to other layouts, congestion, or multi-picker coordination.",
+  "The reported range is relative to the named heuristics and evaluated instances, not a guarantee for every order or warehouse.",
+  "This work is an SSRN preprint. The public page does not link an implementation or claim a production deployment."
+],
+    questions: [
+  {
+    "question": "What does DDQN decide in the hierarchical routing method?",
+    "answer": "The DDQN agent chooses the sequence of aisles. Dynamic programming solves the lower-level routing subproblems inside the aisles."
+  },
+  {
+    "question": "What does the reported 3.0% to 15.4% improvement mean?",
+    "answer": "It is the reported reduction in total travel distance compared with S-shape and largest-gap heuristics in the evaluated settings. It is not a claim of the same percentage reduction in operating costs."
+  }
+],
+    related: [
+  "multi-agent-fleet-maintenance",
+  "multi-sensor-pomdp-maintenance"
+],
+
     title: "Hierarchical Deep Reinforcement Learning for Warehouse Picker Routing",
     shortTitle: "Warehouse picker routing (HierPick)",
     domain: "Reinforcement learning",
@@ -92,6 +144,31 @@ export const projects: Project[] = [
   },
   {
     slug: "multi-sensor-pomdp-maintenance",
+    explanation: [
+  "Condition-based maintenance uses measurements to decide when intervention is justified. Multiple sensors provide different views of degradation, but neither an individual reading nor the combined readings necessarily reveal the true equipment health. A POMDP represents that uncertainty explicitly.",
+  "The belief state is a probability distribution over possible health states. As observations arrive, the planner updates that distribution and uses it to choose an action. The aim is a maintenance policy that balances operating, preventive maintenance, and failure consequences over time.",
+  "This work connects the inference problem to the decision problem: sensor information changes the belief state, and the belief state informs the operate-versus-maintain decision. Belief-state aggregation and state-space compression address the computational challenge of using multiple sensor signals."
+],
+    limitations: [
+  "Control-limit structure depends on the assumptions of the maintenance model; it should not be interpreted as a universal threshold rule for all equipment.",
+  "Results depend on degradation dynamics, observation noise, and the cost model. Applying the framework to a new asset requires checking those assumptions and validating the sensor model.",
+  "The TechRxiv work is a preprint. The related deviation-informed manuscript is listed as submitted, not as an accepted journal article."
+],
+    questions: [
+  {
+    "question": "Why use a POMDP for maintenance planning?",
+    "answer": "A POMDP separates the hidden condition of equipment from noisy measurements. Decisions use a belief over possible health states rather than assuming a sensor reading is the true state."
+  },
+  {
+    "question": "Is this the same method as deep reinforcement learning?",
+    "answer": "No. This project studies a model-based POMDP framework and control-limit policies. Related fleet work explores multi-agent reinforcement learning; the two approaches share a sequential decision-making motivation but use different methods."
+  }
+],
+    related: [
+  "multi-agent-fleet-maintenance",
+  "hierarchical-ddqn-warehouse-routing"
+],
+
     title: "Multi-Sensor Condition-Based Maintenance under Partial Observability",
     shortTitle: "Multi-sensor POMDP maintenance",
     domain: "Sequential decision-making",

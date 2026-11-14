@@ -50,3 +50,13 @@ The downloadable CV still needs the separate content corrections identified in t
 - [IndexNow: protocol and response codes](https://www.indexnow.org/documentation)
 
 There is no guaranteed number-one position or guaranteed AI citation. Google says its normal search requirements apply to AI features and does not require special AI text files or special AI schema.
+
+## November 14, 2026 follow-up
+
+The three existing research pages now include plain-language method explanations, scope/limitations, concise research questions and answers, related-work links, and visible authorship. These extend substantive existing pages rather than creating competing keyword pages. The academic CV has been rebuilt from current website content, including corrected teaching terms, candidacy, ORCID, and separate publication statuses. Its public URL remains unchanged and remains noindex in favor of the HTML CV page.
+
+The authenticated GitHub profile was found to use the defunct asalehiyan.com domain and only the given name. The API credential cannot update account-profile fields (GitHub returned 404); the prepared name, website, and biography changes remain pending. The verified GitHub URL is included in site profile links and Person.sameAs.
+
+The owner confirmed that asalehiyan.com is not owned by them. No DNS changes or redirects for that third-party domain were attempted. See `search-monitoring/README.md` and `queries.json` for the comparison protocol and remaining external profile work.
+
+To regenerate the CV: `node scripts/export-cv-content.cjs > /tmp/cv-content.json`, then use Python with reportlab installed: `python scripts/pdf/build_cv.py /tmp/cv-content.json`. Render and inspect all PDF pages before committing. Its facts are maintained in the content modules; selected project summaries are in the PDF generator.

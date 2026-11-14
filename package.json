@@ -21,7 +21,8 @@
     "newsletter:send": "node scripts/newsletter-send.mjs",
     "icons:generate": "node scripts/generate-icons.mjs",
     "icons:normalize-html": "node scripts/normalize-html-favicons.mjs",
-    "icons:refresh": "npm run icons:generate && npm run icons:normalize-html"
+    "icons:refresh": "npm run icons:generate && npm run icons:normalize-html",
+    "seo:content-audit": "node scripts/audit-search-content.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

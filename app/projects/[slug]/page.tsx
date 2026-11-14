@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProjectFigure } from "@/components/project-figure";
 import { SeoJsonLd } from "@/components/seo-json-ld";
+import { siteContent, lastUpdated } from "@/lib/content";
 import { getProjectBySlug, projects } from "@/lib/projects";
 import { breadcrumbJsonLd, pageMetadata, projectJsonLd } from "@/lib/seo";
 
@@ -56,6 +57,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         <Badge variant="outline">{project.domain}</Badge>
         <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">{project.title}</h1>
         <p className="mt-2 text-sm text-muted-foreground">{project.status}</p>
+        <p className="mt-3 text-sm text-muted-foreground">By <Link href="/" className="prose-link">{siteContent.person.name}</Link> · {siteContent.person.affiliation} · Updated <time dateTime={lastUpdated}>{lastUpdated}</time></p>
       </header>
 
       <section aria-labelledby="result-heading" className="mt-8 rounded-lg border border-primary/50 bg-primary/5 p-6">
@@ -82,6 +84,15 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           ))}
         </ul>
       </section>
+
+      {project.explanation ? (
+        <section aria-labelledby="explanation-heading" className="mt-10">
+          <h2 id="explanation-heading" className={h2}>How the approach works</h2>
+          <div className="mt-3 space-y-4 text-base leading-8 text-muted-foreground">
+            {project.explanation.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
+        </section>
+      ) : null}
 
       <section aria-labelledby="figure-heading" className="mt-10">
         <h2 id="figure-heading" className={h2}>
@@ -111,6 +122,36 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         </h2>
         <p className="mt-3 text-base leading-8 text-muted-foreground">{project.role}</p>
       </section>
+
+      {project.limitations ? (
+        <section aria-labelledby="limitations-heading" className="mt-10">
+          <h2 id="limitations-heading" className={h2}>Scope and limitations</h2>
+          <ul className="mt-3 list-disc space-y-3 pl-5 text-base leading-8 text-muted-foreground">
+            {project.limitations.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </section>
+      ) : null}
+      {project.questions ? (
+        <section aria-labelledby="questions-heading" className="mt-10">
+          <h2 id="questions-heading" className={h2}>Research questions, explained</h2>
+          <dl className="mt-4 space-y-6">
+            {project.questions.map((item) => <div key={item.question}>
+              <dt className="font-semibold text-foreground">{item.question}</dt>
+              <dd className="mt-2 text-base leading-8 text-muted-foreground">{item.answer}</dd>
+            </div>)}
+          </dl>
+        </section>
+      ) : null}
+      {project.related ? (
+        <section aria-labelledby="related-heading" className="mt-10">
+          <h2 id="related-heading" className={h2}>Related research</h2>
+          <ul className="mt-3 space-y-3">
+            {project.related.map((slug) => { const related = getProjectBySlug(slug); return related ? <li key={slug}>
+              <Link className="prose-link inline-flex min-h-11 items-center" href={`/projects/${slug}` as Route}>{related.title}</Link>
+            </li> : null; })}
+          </ul>
+        </section>
+      ) : null}
 
       <section aria-labelledby="links-heading" className="mt-10">
         <h2 id="links-heading" className={h2}>

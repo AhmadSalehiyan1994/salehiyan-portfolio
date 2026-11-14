@@ -174,6 +174,7 @@ export function projectJsonLd(project: Project) {
     about: project.domain,
     keywords: project.stack,
     creativeWorkStatus: project.status,
+    dateModified: lastUpdated,
     author: { "@type": "Person", "@id": `${baseUrl}/#person`, name: siteContent.person.name, url: `${baseUrl}/` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     citation: publications.filter((publication) => publication.project === project.slug).map((publication) => ({
