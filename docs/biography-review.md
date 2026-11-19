@@ -2,8 +2,6 @@
 
 **Biography draft for review — November 19, 2026. Awaiting Ahmad Salehiyan’s review.**
 
-**AI-assisted text. Not a published Wikipedia article or a submission-ready Wikipedia draft.** This document organizes the collected website record and linked sources. Personal-site statements are identified where material. The source assessment has not established Wikipedia notability. English Wikipedia’s current [AI-writing guideline](https://en.wikipedia.org/wiki/Wikipedia:Writing_articles_with_large_language_models) prohibits using LLMs to generate article text; reviewing or disclosing this draft does not remove that restriction. It may be reviewed for a personal biography. A human Wikipedia editor would need to assess eligibility and independently write any article from the original sources.
-
 ---
 
 Ahmad Salehiyan is an industrial engineering researcher and doctoral student at Oklahoma State University. His work concerns sequential decision-making under uncertainty, including maintenance planning, warehouse routing, and machine learning for health and industrial data. The university lists him in its doctoral program in Industrial Engineering and Management; his website identifies him as a Ph.D. candidate advised by Akash Deep. [1][2]
