@@ -17,6 +17,7 @@ export function generateStaticParams() {
 
 // Short titles keep the page title under 60 characters.
 const shortTitles: Record<string, string> = {
+  "reinforcement-learning-maintenance-planning": "RL for Maintenance Planning",
   "machine-learning": "Machine Learning for Reliability",
   "integer-programming": "Integer Programming for Planning",
   "maintenance-management": "Maintenance Management Systems",
@@ -25,6 +26,7 @@ const shortTitles: Record<string, string> = {
 };
 
 const descriptions: Record<string, string> = {
+  "reinforcement-learning-maintenance-planning": "Ahmad Salehiyan explains reinforcement learning for maintenance: states, rewards, POMDPs, fleet constraints, and a worked cost example.",
   "machine-learning": "A practical guide to supervised, unsupervised, and reinforcement learning in reliability work, with references.",
   "integer-programming": "Integer programming formulations and classical methods for planning, allocation, and scheduling, with references.",
   "maintenance-management": "How to build maintenance systems around service level, work-order quality, and CMMS use, with references.",

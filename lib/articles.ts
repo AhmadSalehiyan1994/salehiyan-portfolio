@@ -34,6 +34,106 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+  "slug": "reinforcement-learning-maintenance-planning",
+  "title": "Reinforcement Learning for Maintenance Planning: States, Rewards, and Constraints",
+  "domain": "Reinforcement Learning",
+  "summary": "How to frame maintenance as a sequential decision problem, handle noisy sensors with a POMDP, and evaluate learned policies against practical baselines.",
+  "heroImage": "/images/industrial-reliability-engineer.jpg",
+  "heroImageAlt": "Engineer checking equipment information on a tablet on a factory floor",
+  "publishedAt": "2026-11-18",
+  "updatedAt": "2026-11-18",
+  "takeaways": [
+    "Predicting failure and deciding when to maintain are different tasks.",
+    "Noisy sensors require a representation of uncertainty, not an assumption that machine health is observed perfectly.",
+    "Compare cost, downtime, and constraint violations against simple policies before considering deployment."
+  ],
+  "references": [
+    {
+      "text": "R. S. Sutton and A. G. Barto. Reinforcement Learning: An Introduction, second edition. MIT Press, 2018. Foundational definitions of agents, policies, rewards, and value functions.",
+      "href": "http://incompleteideas.net/book/the-book-2nd.html"
+    },
+    {
+      "text": "L. P. Kaelbling, M. L. Littman, and A. R. Cassandra. Planning and acting in partially observable stochastic domains. Artificial Intelligence, 101, 99–134, 1998. Belief states and planning under partial observability.",
+      "href": "https://doi.org/10.1016/S0004-3702(98)00023-X"
+    }
+  ],
+  "related": {
+    "text": "Ahmad Salehiyan’s research at Oklahoma State University includes multi-sensor POMDP maintenance planning and ongoing multi-agent fleet maintenance research. The worked example above is illustrative; it is not an experimental result from these projects. See the linked records for each paper’s publication status.",
+    "publicationIds": [
+      "pomdp-techrxiv-2024",
+      "deviation-informed",
+      "fleet-marl"
+    ],
+    "projectSlugs": [
+      "multi-sensor-pomdp-maintenance",
+      "multi-agent-fleet-maintenance"
+    ]
+  },
+  "sections": [
+    {
+      "id": "prediction-versus-decisions",
+      "title": "What does reinforcement learning add to predictive maintenance?",
+      "paragraphs": [
+        "A failure predictor estimates what may happen. A maintenance policy decides what to do: continue operating, inspect, or maintain. Today’s action changes tomorrow’s equipment condition, available capacity, and costs. That feedback makes maintenance a sequential decision problem.",
+        "Reinforcement learning learns a policy from experience to improve expected cumulative reward. For maintenance, the reward can represent negative operating and maintenance costs. A learned policy still depends on how the environment, information, and objective are defined; selecting a more complex algorithm does not repair a poorly specified decision problem."
+      ]
+    },
+    {
+      "id": "define-the-problem",
+      "title": "Define the state, observations, actions, and reward",
+      "paragraphs": [
+        "For a maintenance application, first define the decision interval: one shift, one day, or another operationally meaningful period. Specify whether maintenance occupies one interval or several. The model must account for the consequences of that timing.",
+        "The state describes the system variables needed to predict its next condition, such as degradation, operating mode, and available maintenance resources. Observations are the information actually available to the decision maker, such as vibration readings or inspection results. Actions might include operating, inspecting, or preventive maintenance; only include actions that the real process permits.",
+        "A useful objective accounts for more than the price of a repair. Include operating costs, planned downtime, failure consequences, and any relevant resource use. Define the planning horizon and terminal conditions, so a policy cannot appear successful merely by postponing costly failures beyond the evaluation window."
+      ]
+    },
+    {
+      "id": "worked-example",
+      "title": "A small worked example: maintain now or keep operating?",
+      "paragraphs": [
+        "Consider an illustrative one-period decision in arbitrary cost units. Preventive maintenance costs 30, including downtime, and is assumed to remove failure risk for this period. Continued operation costs 5. If failure occurs, an additional cost of 100 is incurred. These numbers are hypothetical, not measurements from a plant or a research experiment.",
+        "If the estimated probability of failure is 0.10, the expected immediate cost of operating is 5 + 0.10 × 100 = 15, compared with 30 for maintenance. If the probability is 0.40, the expected immediate operating cost is 45. Under these assumptions, the one-period break-even probability is (30 − 5) / 100 = 0.25.",
+        "This calculation is a transparent baseline, not an RL algorithm. A sequential policy also values future condition, future production, and resource availability. Maintenance today may improve future reliability, while waiting may preserve a scarce crew for another asset. Those effects can change the decision even when immediate costs favor operating."
+      ]
+    },
+    {
+      "id": "partial-observability",
+      "title": "Why noisy sensors lead to a POMDP",
+      "paragraphs": [
+        "A sensor reading is evidence about condition, not direct access to the true degradation state. A partially observable Markov decision process, or POMDP, represents that distinction. Its belief state is a probability distribution over possible hidden states, updated as actions and observations arrive.",
+        "For example, an unusual vibration reading may indicate deterioration or measurement noise. Combining the reading with prior information and the observation model helps distinguish these possibilities. The decision then depends on uncertainty about health as well as its estimated level.",
+        "A POMDP is a model of a decision problem; reinforcement learning is a family of methods for learning how to act. They are not interchangeable terms. A POMDP may be solved with model-based planning, while learning methods may use a belief representation or observation history. The representation and assumptions should be stated explicitly."
+      ]
+    },
+    {
+      "id": "fleet-constraints",
+      "title": "From a single machine to a fleet with shared resources",
+      "paragraphs": [
+        "A fleet introduces coupling between assets. Two machines may both benefit from maintenance, but only one crew may be available. Independently selecting the best action for each machine can produce an infeasible joint schedule.",
+        "Possible formulations include centralized decisions or multiple agents with coordination and shared resource constraints. The choice depends on system scale, available information, and the cost of coordination. Multi-agent learning is not automatically better than a centralized optimizer.",
+        "Penalizing a resource violation in the reward does not by itself guarantee that the violation cannot occur. If a limit must hold at every decision, represent it explicitly in action selection or another enforceable mechanism, and test the resulting policy under demanding scenarios."
+      ]
+    },
+    {
+      "id": "evaluation",
+      "title": "How to evaluate a learned maintenance policy",
+      "paragraphs": [
+        "Use practical baselines such as periodic preventive maintenance and a sensor-threshold rule. When feasible, include a small model-based planning solution as a reference. Give all policies the same information, cost assumptions, resource limits, and evaluation horizon.",
+        "Evaluate on held-out simulated trajectories or other appropriately separated data. Report variability across runs as well as average cost. Track downtime, failures, preventive interventions, and constraint violations separately; a single reward number can hide an unacceptable trade-off.",
+        "Stress-test changes in degradation rates, sensor noise, missing observations, and maintenance duration. A simulation result is evidence about the modeled environment, not proof of field performance. Before operational use, the process also needs model validation, accountable human oversight, and a defined fallback policy."
+      ]
+    },
+    {
+      "id": "when-to-use",
+      "title": "When is reinforcement learning worth considering?",
+      "paragraphs": [
+        "Consider RL when actions have meaningful long-term effects, the decision space is difficult for simpler methods, and a credible source of training experience is available. Start with a clear decision model and measurable baselines.",
+        "For a small, well-understood system, a threshold policy or model-based optimizer may be easier to validate and maintain. The research question is whether learning improves the relevant operational outcomes under the same constraints, not whether it can replace every existing planning method."
+      ]
+    }
+  ]
+},
+  {
     slug: "machine-learning",
     title: "Machine Learning for Industrial Reliability: From Theory to Deployment",
     domain: "Machine Learning",

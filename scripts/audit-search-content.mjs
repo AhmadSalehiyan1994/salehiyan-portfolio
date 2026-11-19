@@ -26,7 +26,7 @@ for (const path of paths) {
   }
   report.pages.push({path,status:r.status,title,canonical:url,jsonLdBlocks:structured.length});
 }
-for (const [path,destination] of [['/index.html','/'],['/cv_file/AhmadSalehiyan_CV.pdf','/cv']]) {
+for (const [path,destination] of [['/Machin%20learning/Reinforcement%20Learning/index.html','/insights/reinforcement-learning-maintenance-planning'],['/index.html','/'],['/cv_file/AhmadSalehiyan_CV.pdf','/cv']]) {
  const r=await get(path,{redirect:'manual'});assert([301,308].includes(r.status));assert.equal(new URL(r.headers.get('location'),base).pathname,destination);report.redirects.push({path,status:r.status,destination});
 }
 const pdf=await get('/files/Ahmad-Salehiyan-CV.pdf');assert.equal(pdf.status,200);assert(pdf.headers.get('content-type')?.includes('pdf'));assert(pdf.headers.get('x-robots-tag')?.includes('noindex'));

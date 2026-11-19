@@ -99,6 +99,11 @@ export default function HomePage() {
       </Section>
 
       {/* 2. Research themes */}
+      <Section id="reinforcement-learning-guide" title="Reinforcement learning for maintenance planning">
+        <p className="max-w-3xl text-base leading-8 text-muted-foreground">How do sensor readings become maintenance decisions? Explore states, rewards, partial observability, and fleet constraints through a worked example connected to my research.</p>
+        <ArrowLink href="/insights/reinforcement-learning-maintenance-planning">Read the practical guide</ArrowLink>
+      </Section>
+
       <Section id="research" title="Research themes" action={{ label: "Research overview", href: "/research" }}>
         <ul className="grid gap-4 md:grid-cols-3">
           {researchThemes.map((theme) => (

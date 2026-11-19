@@ -28,6 +28,11 @@ export default function ResearchPage() {
         </div>
       </Section>
 
+      <Section id="maintenance-guide" title="Reinforcement learning for maintenance: a practical guide">
+        <p className="max-w-3xl text-base leading-8 text-muted-foreground">Start with the decision problem: what the sensors reveal, when to maintain, and how shared resources change the policy. This guide includes an illustrative cost calculation and an evaluation checklist.</p>
+        <ArrowLink href="/insights/reinforcement-learning-maintenance-planning">Read the maintenance planning guide</ArrowLink>
+      </Section>
+
       <Section id="themes" title="Research themes">
         <ol className="space-y-6">
           {researchThemes.map((theme, index) => (

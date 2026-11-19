@@ -65,6 +65,11 @@ const nextConfig = {
       redirect301("/projects/machine-learning-learning-path", "/projects#earlier-work"),
       // Generated case PDFs were removed. Send readers to the project page.
       redirect301("/projects/:slug/case.pdf", "/projects/:slug"),
+      // Preserve the specific RL article before the broader machine-learning catch-all.
+      ...["/Machin learning/Reinforcement Learning", "/Machin%20learning/Reinforcement%20Learning"].flatMap((path) => [
+        redirect301(path, "/insights/reinforcement-learning-maintenance-planning"),
+        redirect301(`${path}/index.html`, "/insights/reinforcement-learning-maintenance-planning"),
+      ]),
       // Legacy static folders from the first version of the site.
       ...legacyFolders.flatMap(([folder, destination]) => [
         redirect301(`/${folder}`, destination),
